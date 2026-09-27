@@ -30,8 +30,8 @@ DOM 编码题在隔离的模拟 DOM 中判题，预览展示测试后的页面�
 
 ## 部署
 
-原 Sites 地址目前返回 Cloudflare 403，暂时不能作为公开入口。源码现已发布到 [xunagent/javascript-mastery](https://github.com/xunagent/javascript-mastery)。GitHub Pages 启用后，公开地址将是 <https://xunagent.github.io/javascript-mastery/>。
+公开学习地址：<https://xunagent.github.io/javascript-mastery/>。源码位于 [xunagent/javascript-mastery](https://github.com/xunagent/javascript-mastery)。原 Sites 地址返回 Cloudflare 403，请使用 GitHub Pages 地址。
 
-仓库包含 GitHub Pages 工作流。首次发布须在仓库的 **Settings → Pages → Build and deployment → Source** 中选择 **GitHub Actions**。之后向 `main` 推送时，工作流会通过内容检查并发布 `dist`。静态文件中的题目和测试可被访问者查看，因此本站用于自主学习，不作为保密考试系统。
+仓库的 Pages 来源已设为 **GitHub Actions**。之后向 `main` 推送时，工作流会通过内容检查并发布 `dist`。静态文件中的题目和测试可被访问者查看，因此本站用于自主学习，不作为保密考试系统。
 
 学习记录保存在当前浏览器，也可在“学习记录”页面导出与导入 JSON 存档。
