@@ -3,13 +3,16 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "node scripts/generate-questions.mjs && esbuild src/dom-worker.mjs --bundle --format=iife --platform=browser --target=es2022 --outfile=dist/dom-worker.js",
+    "build": "node scripts/generate-questions.mjs && esbuild src/dom-worker.mjs --bundle --format=iife --platform=browser --target=es2022 --outfile=dist/dom-worker.js && node network/build.mjs",
     "test": "node --test tests/*.test.mjs",
     "audit": "node scripts/audit-coverage.mjs",
-    "audit:strict": "node scripts/audit-coverage.mjs --strict"
+    "audit:strict": "node scripts/audit-coverage.mjs --strict",
+    "network:audit": "node network/build.mjs --strict",
+    "network:smoke": "node scripts/network-smoke.mjs"
   },
   "devDependencies": {
     "esbuild": "^0.28.2",
-    "linkedom": "^0.18.13"
+    "linkedom": "^0.18.13",
+    "playwright": "^1.63.0"
   }
 }

@@ -35,3 +35,24 @@ DOM 编码题在隔离的模拟 DOM 中判题，预览展示测试后的页面�
 仓库的 Pages 来源已设为 **GitHub Actions**。之后向 `main` 推送时，工作流会通过内容检查并发布 `dist`。静态文件中的题目和测试可被访问者查看，因此本站用于自主学习，不作为保密考试系统。
 
 学习记录保存在当前浏览器，也可在“学习记录”页面导出与导入 JSON 存档。
+
+## 网络与 HTTP 闯关
+
+网络课程入口：[网络闯关](https://xunagent.github.io/javascript-mastery/network/)。同一次构建会生成 `dist/network/`，不需要 AI、账号或后端服务。
+
+- 10 大关、72 小关、1008 道原创题，每关 14 道；包含单选、多选、流程排序和填空推演。
+- 每题三级提示、参考答案与解析；每小关有短讲、对应资料链接以及适用的《图解 HTTP》背景章节。书籍正文与图片未随站分发，现代协议以对应文档补充。
+- 先独立通过 7 道不同题，三天后再用初始 7 道之外的 2 道独立复测。看提示或本轮答错后记为练习；该题三天无活动后可开启新的独立复答轮次。
+- 错题、提示练习与跳过题进入待补强。进度保存在当前浏览器；导入另一设备存档会合并记录，不会自动云同步。网络课程与 JavaScript 课程的记录分开保存。
+
+课程源码在 `network/content.mjs`，题库在 `network/questions.mjs` 与 `network/packs/`，界面与判题逻辑在 `network/site/`。运行 `npm run network:audit` 检查覆盖、题量、题型、答案、提示和选项唯一性。
+
+浏览器回归检查：
+
+```bash
+npx playwright install --with-deps chromium
+npm run build
+npm run network:smoke
+```
+
+回归覆盖桌面与手机宽度、全部 72 个小关、四种答题交互、提示、错题、延迟复测、刷新持久化、无效存档拒绝及有效存档合并/导出。可用 `NETWORK_SCREENSHOTS=/tmp/network-shots npm run network:smoke` 输出检查截图。Pages 工作流发布前会执行相同检查。
