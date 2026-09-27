@@ -1,0 +1,534 @@
+[
+  {
+    "id": "array-methods-01",
+    "index": 249,
+    "from": ".push(",
+    "to": ".unshift(",
+    "type": "顺序"
+  },
+  {
+    "id": "array-methods-03",
+    "index": 272,
+    "from": ">=",
+    "to": ">",
+    "type": "边界"
+  },
+  {
+    "id": "map-set-01",
+    "index": 166,
+    "from": "||",
+    "to": "&&",
+    "type": "条件"
+  },
+  {
+    "id": "json-01",
+    "index": 288,
+    "from": "??",
+    "to": "||",
+    "type": "缺省值"
+  },
+  {
+    "id": "array-methods-02",
+    "index": 89,
+    "from": "||",
+    "to": "&&",
+    "type": "条件"
+  },
+  {
+    "id": "symbol-02",
+    "index": 137,
+    "from": ".filter(",
+    "to": ".map(",
+    "type": "数组筛选"
+  },
+  {
+    "id": "primitives-methods-02",
+    "index": 81,
+    "from": ".trim()",
+    "to": ".toString()",
+    "type": "预处理"
+  },
+  {
+    "id": "number-01",
+    "index": 47,
+    "from": ".trim()",
+    "to": ".toString()",
+    "type": "预处理"
+  },
+  {
+    "id": "weakmap-weakset-01",
+    "index": 99,
+    "from": ".has(",
+    "to": ".get(",
+    "type": "存在性"
+  },
+  {
+    "id": "iterable-01",
+    "index": 80,
+    "from": "<=",
+    "to": "<",
+    "type": "边界"
+  },
+  {
+    "id": "keys-values-entries-01",
+    "index": 61,
+    "from": ".filter(",
+    "to": ".map(",
+    "type": "数组筛选"
+  },
+  {
+    "id": "date-01",
+    "index": 129,
+    "from": ".slice(0,",
+    "to": ".slice(1,",
+    "type": "起点"
+  },
+  {
+    "id": "extend-natives-02",
+    "index": 64,
+    "from": ".filter(",
+    "to": ".map(",
+    "type": "数组筛选"
+  },
+  {
+    "id": "mixins-01",
+    "index": 193,
+    "from": ".push(",
+    "to": ".unshift(",
+    "type": "顺序"
+  },
+  {
+    "id": "proxy-01",
+    "index": 154,
+    "from": "<=",
+    "to": "<",
+    "type": "边界"
+  },
+  {
+    "id": "promise-chaining-02",
+    "index": 141,
+    "from": ".push(",
+    "to": ".unshift(",
+    "type": "顺序"
+  },
+  {
+    "id": "regexp-multiline-mode-01",
+    "index": 101,
+    "from": ".trim()",
+    "to": ".toString()",
+    "type": "预处理"
+  },
+  {
+    "id": "arraybuffer-binary-arrays-03",
+    "index": 63,
+    "from": "||",
+    "to": "&&",
+    "type": "条件"
+  },
+  {
+    "id": "file-03",
+    "index": 180,
+    "from": ".every(",
+    "to": ".some(",
+    "type": "量词"
+  },
+  {
+    "id": "fetch-progress-03",
+    "index": 214,
+    "from": ".push(",
+    "to": ".unshift(",
+    "type": "顺序"
+  },
+  {
+    "id": "resume-upload-03",
+    "index": 355,
+    "from": "Math.min(",
+    "to": "Math.max(",
+    "type": "极值"
+  },
+  {
+    "id": "js-animation-03",
+    "index": 177,
+    "from": "Math.min(",
+    "to": "Math.max(",
+    "type": "极值"
+  },
+  {
+    "id": "array-methods-third-01",
+    "index": 159,
+    "from": ">=",
+    "to": ">",
+    "type": "边界"
+  },
+  {
+    "id": "recursion-third-01",
+    "index": 94,
+    "from": ".flatMap(",
+    "to": ".map(",
+    "type": "展平"
+  },
+  {
+    "id": "closure-third-01",
+    "index": 72,
+    "from": "<=",
+    "to": "<",
+    "type": "边界"
+  },
+  {
+    "id": "call-apply-decorators-third-01",
+    "index": 64,
+    "from": "||",
+    "to": "&&",
+    "type": "条件"
+  },
+  {
+    "id": "class-third-01",
+    "index": 86,
+    "from": "<=",
+    "to": "<",
+    "type": "边界"
+  },
+  {
+    "id": "async-await-third-01",
+    "index": 122,
+    "from": ".push(",
+    "to": ".unshift(",
+    "type": "顺序"
+  },
+  {
+    "id": "custom-errors-third-01",
+    "index": 207,
+    "from": "||",
+    "to": "&&",
+    "type": "条件"
+  },
+  {
+    "id": "async-iterators-generators-third-01",
+    "index": 207,
+    "from": ".push(",
+    "to": ".unshift(",
+    "type": "顺序"
+  },
+  {
+    "id": "unicode-third-01",
+    "index": 137,
+    "from": ".slice(0,",
+    "to": ".slice(1,",
+    "type": "起点"
+  },
+  {
+    "id": "cookie-third-01",
+    "index": 163,
+    "from": ".slice(0,",
+    "to": ".slice(1,",
+    "type": "起点"
+  },
+  {
+    "id": "type-conversions-depth-03",
+    "index": 58,
+    "from": ".trim()",
+    "to": ".toString()",
+    "type": "预处理"
+  },
+  {
+    "id": "alert-prompt-confirm-depth-03",
+    "index": 91,
+    "from": ".trim()",
+    "to": ".toString()",
+    "type": "预处理"
+  },
+  {
+    "id": "comparison-depth-03",
+    "index": 50,
+    "from": "||",
+    "to": "&&",
+    "type": "条件"
+  },
+  {
+    "id": "ifelse-depth-03",
+    "index": 103,
+    "from": "<=",
+    "to": "<",
+    "type": "边界"
+  },
+  {
+    "id": "function-expressions-depth-03",
+    "index": 113,
+    "from": ".toLowerCase()",
+    "to": ".toUpperCase()",
+    "type": "大小写"
+  },
+  {
+    "id": "while-for-depth-03",
+    "index": 148,
+    "from": ".push(",
+    "to": ".unshift(",
+    "type": "顺序"
+  },
+  {
+    "id": "primitives-methods-depth-03",
+    "index": 65,
+    "from": ".toUpperCase()",
+    "to": ".toLowerCase()",
+    "type": "大小写"
+  },
+  {
+    "id": "number-depth-03",
+    "index": 59,
+    "from": "||",
+    "to": "&&",
+    "type": "条件"
+  },
+  {
+    "id": "string-depth-03",
+    "index": 57,
+    "from": ".map(",
+    "to": ".filter(",
+    "type": "数组映射"
+  },
+  {
+    "id": "array-depth-03",
+    "index": 122,
+    "from": ".slice(0,",
+    "to": ".slice(1,",
+    "type": "起点"
+  },
+  {
+    "id": "iterable-depth-03",
+    "index": 108,
+    "from": ".push(",
+    "to": ".unshift(",
+    "type": "顺序"
+  },
+  {
+    "id": "map-set-depth-03",
+    "index": 137,
+    "from": ".push(",
+    "to": ".unshift(",
+    "type": "顺序"
+  },
+  {
+    "id": "date-depth-03",
+    "index": 62,
+    "from": "||",
+    "to": "&&",
+    "type": "条件"
+  },
+  {
+    "id": "keys-values-entries-depth-03",
+    "index": 86,
+    "from": ".map(",
+    "to": ".filter(",
+    "type": "数组映射"
+  },
+  {
+    "id": "recursion-depth-03",
+    "index": 93,
+    "from": ".map(",
+    "to": ".filter(",
+    "type": "数组映射"
+  },
+  {
+    "id": "json-depth-03",
+    "index": 87,
+    "from": "||",
+    "to": "&&",
+    "type": "条件"
+  },
+  {
+    "id": "rest-parameters-spread-depth-03",
+    "index": 91,
+    "from": ".map(",
+    "to": ".filter(",
+    "type": "数组映射"
+  },
+  {
+    "id": "property-accessors-depth-03",
+    "index": 138,
+    "from": ".trim()",
+    "to": ".toString()",
+    "type": "预处理"
+  },
+  {
+    "id": "prototype-methods-depth-03",
+    "index": 148,
+    "from": ".push(",
+    "to": ".unshift(",
+    "type": "顺序"
+  },
+  {
+    "id": "class-depth-03",
+    "index": 153,
+    "from": "||",
+    "to": "&&",
+    "type": "条件"
+  },
+  {
+    "id": "static-properties-methods-depth-03",
+    "index": 170,
+    "from": "||",
+    "to": "&&",
+    "type": "条件"
+  },
+  {
+    "id": "private-protected-properties-methods-depth-03",
+    "index": 224,
+    "from": "<=",
+    "to": "<",
+    "type": "边界"
+  },
+  {
+    "id": "instanceof-depth-03",
+    "index": 82,
+    "from": "||",
+    "to": "&&",
+    "type": "条件"
+  },
+  {
+    "id": "promise-api-depth-03",
+    "index": 181,
+    "from": ".push(",
+    "to": ".unshift(",
+    "type": "顺序"
+  },
+  {
+    "id": "async-await-depth-03",
+    "index": 323,
+    "from": "Math.min(",
+    "to": "Math.max(",
+    "type": "极值"
+  },
+  {
+    "id": "proxy-depth-03",
+    "index": 85,
+    "from": ".get(",
+    "to": ".has(",
+    "type": "取值"
+  },
+  {
+    "id": "currying-partials-depth-03",
+    "index": 253,
+    "from": ">=",
+    "to": ">",
+    "type": "边界"
+  },
+  {
+    "id": "mousemove-mouseover-mouseout-mouseenter-mouseleave-depth-code-01",
+    "index": 69,
+    "from": "||",
+    "to": "&&",
+    "type": "条件"
+  },
+  {
+    "id": "mouse-events-basics-depth-code-01",
+    "index": 104,
+    "from": "||",
+    "to": "&&",
+    "type": "条件"
+  },
+  {
+    "id": "mouse-drag-and-drop-depth-code-01",
+    "index": 122,
+    "from": "Math.max(",
+    "to": "Math.min(",
+    "type": "极值"
+  },
+  {
+    "id": "pointer-events-depth-code-01",
+    "index": 253,
+    "from": "||",
+    "to": "&&",
+    "type": "条件"
+  },
+  {
+    "id": "keyboard-events-depth-code-01",
+    "index": 73,
+    "from": ".toLowerCase()",
+    "to": ".toUpperCase()",
+    "type": "大小写"
+  },
+  {
+    "id": "onscroll-depth-code-01",
+    "index": 61,
+    "from": "Math.max(",
+    "to": "Math.min(",
+    "type": "极值"
+  },
+  {
+    "id": "form-elements-depth-code-01",
+    "index": 101,
+    "from": ".map(",
+    "to": ".filter(",
+    "type": "数组映射"
+  },
+  {
+    "id": "blob-depth-code-01",
+    "index": 307,
+    "from": ".push(",
+    "to": ".unshift(",
+    "type": "顺序"
+  },
+  {
+    "id": "file-depth-code-01",
+    "index": 164,
+    "from": ".slice(0,",
+    "to": ".slice(1,",
+    "type": "起点"
+  },
+  {
+    "id": "websocket-depth-code-01",
+    "index": 323,
+    "from": ".push(",
+    "to": ".unshift(",
+    "type": "顺序"
+  },
+  {
+    "id": "js-animation-depth-code-01",
+    "index": 77,
+    "from": "<=",
+    "to": "<",
+    "type": "边界"
+  },
+  {
+    "id": "alert-prompt-confirm-01",
+    "index": 83,
+    "from": ".trim()",
+    "to": ".toString()",
+    "type": "预处理"
+  },
+  {
+    "id": "ifelse-01",
+    "index": 119,
+    "from": ">=",
+    "to": ">",
+    "type": "边界"
+  },
+  {
+    "id": "nullish-coalescing-operator-01",
+    "index": 67,
+    "from": "??",
+    "to": "||",
+    "type": "缺省值"
+  },
+  {
+    "id": "while-for-01",
+    "index": 139,
+    "from": ">=",
+    "to": ">",
+    "type": "边界"
+  },
+  {
+    "id": "function-basics-01",
+    "index": 118,
+    "from": "Math.max(",
+    "to": "Math.min(",
+    "type": "极值"
+  },
+  {
+    "id": "arrow-functions-basics-01",
+    "index": 87,
+    "from": "??",
+    "to": "||",
+    "type": "缺省值"
+  }
+]

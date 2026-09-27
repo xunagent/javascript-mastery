@@ -1,0 +1,1076 @@
+[
+  {
+    "name": "JavaScript 编程语言",
+    "chapters": [
+      {
+        "id": "getting-started",
+        "title": "简介",
+        "url": "https://zh.javascript.info/getting-started",
+        "lessons": [
+          {
+            "id": "intro",
+            "title": "JavaScript 简介",
+            "url": "https://zh.javascript.info/intro"
+          },
+          {
+            "id": "manuals-specifications",
+            "title": "手册与规范",
+            "url": "https://zh.javascript.info/manuals-specifications"
+          },
+          {
+            "id": "code-editors",
+            "title": "代码编辑器",
+            "url": "https://zh.javascript.info/code-editors"
+          },
+          {
+            "id": "devtools",
+            "title": "开发者控制台",
+            "url": "https://zh.javascript.info/devtools"
+          }
+        ]
+      },
+      {
+        "id": "first-steps",
+        "title": "JavaScript 基础知识",
+        "url": "https://zh.javascript.info/first-steps",
+        "lessons": [
+          {
+            "id": "hello-world",
+            "title": "Hello, world!",
+            "url": "https://zh.javascript.info/hello-world"
+          },
+          {
+            "id": "structure",
+            "title": "代码结构",
+            "url": "https://zh.javascript.info/structure"
+          },
+          {
+            "id": "strict-mode",
+            "title": "现代模式，\"use strict\"",
+            "url": "https://zh.javascript.info/strict-mode"
+          },
+          {
+            "id": "variables",
+            "title": "变量",
+            "url": "https://zh.javascript.info/variables"
+          },
+          {
+            "id": "types",
+            "title": "数据类型",
+            "url": "https://zh.javascript.info/types"
+          },
+          {
+            "id": "alert-prompt-confirm",
+            "title": "交互：alert、prompt 和 confirm",
+            "url": "https://zh.javascript.info/alert-prompt-confirm"
+          },
+          {
+            "id": "type-conversions",
+            "title": "类型转换",
+            "url": "https://zh.javascript.info/type-conversions"
+          },
+          {
+            "id": "operators",
+            "title": "基础运算符，数学运算",
+            "url": "https://zh.javascript.info/operators"
+          },
+          {
+            "id": "comparison",
+            "title": "值的比较",
+            "url": "https://zh.javascript.info/comparison"
+          },
+          {
+            "id": "ifelse",
+            "title": "条件分支：if 和 '?'",
+            "url": "https://zh.javascript.info/ifelse"
+          },
+          {
+            "id": "logical-operators",
+            "title": "逻辑运算符",
+            "url": "https://zh.javascript.info/logical-operators"
+          },
+          {
+            "id": "nullish-coalescing-operator",
+            "title": "空值合并运算符 '??'",
+            "url": "https://zh.javascript.info/nullish-coalescing-operator"
+          },
+          {
+            "id": "while-for",
+            "title": "循环：while 和 for",
+            "url": "https://zh.javascript.info/while-for"
+          },
+          {
+            "id": "switch",
+            "title": "\"switch\" 语句",
+            "url": "https://zh.javascript.info/switch"
+          },
+          {
+            "id": "function-basics",
+            "title": "函数",
+            "url": "https://zh.javascript.info/function-basics"
+          },
+          {
+            "id": "function-expressions",
+            "title": "函数表达式",
+            "url": "https://zh.javascript.info/function-expressions"
+          },
+          {
+            "id": "arrow-functions-basics",
+            "title": "箭头函数，基础知识",
+            "url": "https://zh.javascript.info/arrow-functions-basics"
+          },
+          {
+            "id": "javascript-specials",
+            "title": "JavaScript 特性",
+            "url": "https://zh.javascript.info/javascript-specials"
+          }
+        ]
+      },
+      {
+        "id": "code-quality",
+        "title": "代码质量",
+        "url": "https://zh.javascript.info/code-quality",
+        "lessons": [
+          {
+            "id": "debugging-chrome",
+            "title": "在浏览器中调试",
+            "url": "https://zh.javascript.info/debugging-chrome"
+          },
+          {
+            "id": "coding-style",
+            "title": "代码风格",
+            "url": "https://zh.javascript.info/coding-style"
+          },
+          {
+            "id": "comments",
+            "title": "注释",
+            "url": "https://zh.javascript.info/comments"
+          },
+          {
+            "id": "ninja-code",
+            "title": "忍者代码",
+            "url": "https://zh.javascript.info/ninja-code"
+          },
+          {
+            "id": "testing-mocha",
+            "title": "使用 Mocha 进行自动化测试",
+            "url": "https://zh.javascript.info/testing-mocha"
+          },
+          {
+            "id": "polyfills",
+            "title": "Polyfill 和转译器",
+            "url": "https://zh.javascript.info/polyfills"
+          }
+        ]
+      },
+      {
+        "id": "object-basics",
+        "title": "Object（对象）：基础知识",
+        "url": "https://zh.javascript.info/object-basics",
+        "lessons": [
+          {
+            "id": "object",
+            "title": "对象",
+            "url": "https://zh.javascript.info/object"
+          },
+          {
+            "id": "object-copy",
+            "title": "对象引用和复制",
+            "url": "https://zh.javascript.info/object-copy"
+          },
+          {
+            "id": "garbage-collection",
+            "title": "垃圾回收",
+            "url": "https://zh.javascript.info/garbage-collection"
+          },
+          {
+            "id": "object-methods",
+            "title": "对象方法，\"this\"",
+            "url": "https://zh.javascript.info/object-methods"
+          },
+          {
+            "id": "constructor-new",
+            "title": "构造器和操作符 \"new\"",
+            "url": "https://zh.javascript.info/constructor-new"
+          },
+          {
+            "id": "optional-chaining",
+            "title": "可选链 \"?.\"",
+            "url": "https://zh.javascript.info/optional-chaining"
+          },
+          {
+            "id": "symbol",
+            "title": "symbol 类型",
+            "url": "https://zh.javascript.info/symbol"
+          },
+          {
+            "id": "object-toprimitive",
+            "title": "对象 —— 原始值转换",
+            "url": "https://zh.javascript.info/object-toprimitive"
+          }
+        ]
+      },
+      {
+        "id": "data-types",
+        "title": "数据类型",
+        "url": "https://zh.javascript.info/data-types",
+        "lessons": [
+          {
+            "id": "primitives-methods",
+            "title": "原始类型的方法",
+            "url": "https://zh.javascript.info/primitives-methods"
+          },
+          {
+            "id": "number",
+            "title": "数字类型",
+            "url": "https://zh.javascript.info/number"
+          },
+          {
+            "id": "string",
+            "title": "字符串",
+            "url": "https://zh.javascript.info/string"
+          },
+          {
+            "id": "array",
+            "title": "数组",
+            "url": "https://zh.javascript.info/array"
+          },
+          {
+            "id": "array-methods",
+            "title": "数组方法",
+            "url": "https://zh.javascript.info/array-methods"
+          },
+          {
+            "id": "iterable",
+            "title": "Iterable object（可迭代对象）",
+            "url": "https://zh.javascript.info/iterable"
+          },
+          {
+            "id": "map-set",
+            "title": "Map and Set（映射和集合）",
+            "url": "https://zh.javascript.info/map-set"
+          },
+          {
+            "id": "weakmap-weakset",
+            "title": "WeakMap and WeakSet（弱映射和弱集合）",
+            "url": "https://zh.javascript.info/weakmap-weakset"
+          },
+          {
+            "id": "keys-values-entries",
+            "title": "Object.keys，values，entries",
+            "url": "https://zh.javascript.info/keys-values-entries"
+          },
+          {
+            "id": "destructuring-assignment",
+            "title": "解构赋值",
+            "url": "https://zh.javascript.info/destructuring-assignment"
+          },
+          {
+            "id": "date",
+            "title": "日期和时间",
+            "url": "https://zh.javascript.info/date"
+          },
+          {
+            "id": "json",
+            "title": "JSON 方法，toJSON",
+            "url": "https://zh.javascript.info/json"
+          }
+        ]
+      },
+      {
+        "id": "advanced-functions",
+        "title": "函数进阶内容",
+        "url": "https://zh.javascript.info/advanced-functions",
+        "lessons": [
+          {
+            "id": "recursion",
+            "title": "递归和堆栈",
+            "url": "https://zh.javascript.info/recursion"
+          },
+          {
+            "id": "rest-parameters-spread",
+            "title": "Rest 参数与 Spread 语法",
+            "url": "https://zh.javascript.info/rest-parameters-spread"
+          },
+          {
+            "id": "closure",
+            "title": "变量作用域，闭包",
+            "url": "https://zh.javascript.info/closure"
+          },
+          {
+            "id": "var",
+            "title": "老旧的 \"var\"",
+            "url": "https://zh.javascript.info/var"
+          },
+          {
+            "id": "global-object",
+            "title": "全局对象",
+            "url": "https://zh.javascript.info/global-object"
+          },
+          {
+            "id": "function-object",
+            "title": "函数对象，NFE",
+            "url": "https://zh.javascript.info/function-object"
+          },
+          {
+            "id": "new-function",
+            "title": "\"new Function\" 语法",
+            "url": "https://zh.javascript.info/new-function"
+          },
+          {
+            "id": "settimeout-setinterval",
+            "title": "调度：setTimeout 和 setInterval",
+            "url": "https://zh.javascript.info/settimeout-setinterval"
+          },
+          {
+            "id": "call-apply-decorators",
+            "title": "装饰器模式和转发，call/apply",
+            "url": "https://zh.javascript.info/call-apply-decorators"
+          },
+          {
+            "id": "bind",
+            "title": "函数绑定",
+            "url": "https://zh.javascript.info/bind"
+          },
+          {
+            "id": "arrow-functions",
+            "title": "深入理解箭头函数",
+            "url": "https://zh.javascript.info/arrow-functions"
+          }
+        ]
+      },
+      {
+        "id": "object-properties",
+        "title": "对象属性配置",
+        "url": "https://zh.javascript.info/object-properties",
+        "lessons": [
+          {
+            "id": "property-descriptors",
+            "title": "属性标志和属性描述符",
+            "url": "https://zh.javascript.info/property-descriptors"
+          },
+          {
+            "id": "property-accessors",
+            "title": "属性的 getter 和 setter",
+            "url": "https://zh.javascript.info/property-accessors"
+          }
+        ]
+      },
+      {
+        "id": "prototypes",
+        "title": "原型，继承",
+        "url": "https://zh.javascript.info/prototypes",
+        "lessons": [
+          {
+            "id": "prototype-inheritance",
+            "title": "原型继承",
+            "url": "https://zh.javascript.info/prototype-inheritance"
+          },
+          {
+            "id": "function-prototype",
+            "title": "F.prototype",
+            "url": "https://zh.javascript.info/function-prototype"
+          },
+          {
+            "id": "native-prototypes",
+            "title": "原生的原型",
+            "url": "https://zh.javascript.info/native-prototypes"
+          },
+          {
+            "id": "prototype-methods",
+            "title": "原型方法，没有 __proto__ 的对象",
+            "url": "https://zh.javascript.info/prototype-methods"
+          }
+        ]
+      },
+      {
+        "id": "classes",
+        "title": "类",
+        "url": "https://zh.javascript.info/classes",
+        "lessons": [
+          {
+            "id": "class",
+            "title": "Class 基本语法",
+            "url": "https://zh.javascript.info/class"
+          },
+          {
+            "id": "class-inheritance",
+            "title": "类继承",
+            "url": "https://zh.javascript.info/class-inheritance"
+          },
+          {
+            "id": "static-properties-methods",
+            "title": "静态属性和静态方法",
+            "url": "https://zh.javascript.info/static-properties-methods"
+          },
+          {
+            "id": "private-protected-properties-methods",
+            "title": "私有的和受保护的属性和方法",
+            "url": "https://zh.javascript.info/private-protected-properties-methods"
+          },
+          {
+            "id": "extend-natives",
+            "title": "扩展内建类",
+            "url": "https://zh.javascript.info/extend-natives"
+          },
+          {
+            "id": "instanceof",
+            "title": "类检查：\"instanceof\"",
+            "url": "https://zh.javascript.info/instanceof"
+          },
+          {
+            "id": "mixins",
+            "title": "Mixin 模式",
+            "url": "https://zh.javascript.info/mixins"
+          }
+        ]
+      },
+      {
+        "id": "error-handling",
+        "title": "错误处理",
+        "url": "https://zh.javascript.info/error-handling",
+        "lessons": [
+          {
+            "id": "try-catch",
+            "title": "错误处理，\"try...catch\"",
+            "url": "https://zh.javascript.info/try-catch"
+          },
+          {
+            "id": "custom-errors",
+            "title": "自定义 Error，扩展 Error",
+            "url": "https://zh.javascript.info/custom-errors"
+          }
+        ]
+      },
+      {
+        "id": "async",
+        "title": "Promise，async/await",
+        "url": "https://zh.javascript.info/async",
+        "lessons": [
+          {
+            "id": "callbacks",
+            "title": "简介：回调",
+            "url": "https://zh.javascript.info/callbacks"
+          },
+          {
+            "id": "promise-basics",
+            "title": "Promise",
+            "url": "https://zh.javascript.info/promise-basics"
+          },
+          {
+            "id": "promise-chaining",
+            "title": "Promise 链",
+            "url": "https://zh.javascript.info/promise-chaining"
+          },
+          {
+            "id": "promise-error-handling",
+            "title": "使用 promise 进行错误处理",
+            "url": "https://zh.javascript.info/promise-error-handling"
+          },
+          {
+            "id": "promise-api",
+            "title": "Promise API",
+            "url": "https://zh.javascript.info/promise-api"
+          },
+          {
+            "id": "promisify",
+            "title": "Promisification",
+            "url": "https://zh.javascript.info/promisify"
+          },
+          {
+            "id": "microtask-queue",
+            "title": "微任务（Microtask）",
+            "url": "https://zh.javascript.info/microtask-queue"
+          },
+          {
+            "id": "async-await",
+            "title": "async/await",
+            "url": "https://zh.javascript.info/async-await"
+          }
+        ]
+      },
+      {
+        "id": "generators-iterators",
+        "title": "Generator，高级 iteration",
+        "url": "https://zh.javascript.info/generators-iterators",
+        "lessons": [
+          {
+            "id": "generators",
+            "title": "generator",
+            "url": "https://zh.javascript.info/generators"
+          },
+          {
+            "id": "async-iterators-generators",
+            "title": "异步迭代和 generator",
+            "url": "https://zh.javascript.info/async-iterators-generators"
+          }
+        ]
+      },
+      {
+        "id": "modules",
+        "title": "模块",
+        "url": "https://zh.javascript.info/modules",
+        "lessons": [
+          {
+            "id": "modules-intro",
+            "title": "模块 (Module) 简介",
+            "url": "https://zh.javascript.info/modules-intro"
+          },
+          {
+            "id": "import-export",
+            "title": "导出和导入",
+            "url": "https://zh.javascript.info/import-export"
+          },
+          {
+            "id": "modules-dynamic-imports",
+            "title": "动态导入",
+            "url": "https://zh.javascript.info/modules-dynamic-imports"
+          }
+        ]
+      },
+      {
+        "id": "js-misc",
+        "title": "杂项",
+        "url": "https://zh.javascript.info/js-misc",
+        "lessons": [
+          {
+            "id": "proxy",
+            "title": "Proxy 和 Reflect",
+            "url": "https://zh.javascript.info/proxy"
+          },
+          {
+            "id": "eval",
+            "title": "Eval：执行代码字符串",
+            "url": "https://zh.javascript.info/eval"
+          },
+          {
+            "id": "currying-partials",
+            "title": "柯里化（Currying）",
+            "url": "https://zh.javascript.info/currying-partials"
+          },
+          {
+            "id": "reference-type",
+            "title": "Reference Type",
+            "url": "https://zh.javascript.info/reference-type"
+          },
+          {
+            "id": "bigint",
+            "title": "BigInt",
+            "url": "https://zh.javascript.info/bigint"
+          },
+          {
+            "id": "unicode",
+            "title": "Unicode —— 字符串内幕",
+            "url": "https://zh.javascript.info/unicode"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "浏览器：文档、事件、接口",
+    "chapters": [
+      {
+        "id": "document",
+        "title": "Document",
+        "url": "https://zh.javascript.info/document",
+        "lessons": [
+          {
+            "id": "browser-environment",
+            "title": "浏览器环境，规格",
+            "url": "https://zh.javascript.info/browser-environment"
+          },
+          {
+            "id": "dom-nodes",
+            "title": "DOM 树",
+            "url": "https://zh.javascript.info/dom-nodes"
+          },
+          {
+            "id": "dom-navigation",
+            "title": "遍历 DOM",
+            "url": "https://zh.javascript.info/dom-navigation"
+          },
+          {
+            "id": "searching-elements-dom",
+            "title": "搜索：getElement*，querySelector*",
+            "url": "https://zh.javascript.info/searching-elements-dom"
+          },
+          {
+            "id": "basic-dom-node-properties",
+            "title": "节点属性：type，tag 和 content",
+            "url": "https://zh.javascript.info/basic-dom-node-properties"
+          },
+          {
+            "id": "dom-attributes-and-properties",
+            "title": "特性和属性（Attributes and properties）",
+            "url": "https://zh.javascript.info/dom-attributes-and-properties"
+          },
+          {
+            "id": "modifying-document",
+            "title": "修改文档（document）",
+            "url": "https://zh.javascript.info/modifying-document"
+          },
+          {
+            "id": "styles-and-classes",
+            "title": "样式和类",
+            "url": "https://zh.javascript.info/styles-and-classes"
+          },
+          {
+            "id": "size-and-scroll",
+            "title": "元素大小和滚动",
+            "url": "https://zh.javascript.info/size-and-scroll"
+          },
+          {
+            "id": "size-and-scroll-window",
+            "title": "Window 大小和滚动",
+            "url": "https://zh.javascript.info/size-and-scroll-window"
+          },
+          {
+            "id": "coordinates",
+            "title": "坐标",
+            "url": "https://zh.javascript.info/coordinates"
+          }
+        ]
+      },
+      {
+        "id": "events",
+        "title": "事件简介",
+        "url": "https://zh.javascript.info/events",
+        "lessons": [
+          {
+            "id": "introduction-browser-events",
+            "title": "浏览器事件简介",
+            "url": "https://zh.javascript.info/introduction-browser-events"
+          },
+          {
+            "id": "bubbling-and-capturing",
+            "title": "冒泡和捕获",
+            "url": "https://zh.javascript.info/bubbling-and-capturing"
+          },
+          {
+            "id": "event-delegation",
+            "title": "事件委托",
+            "url": "https://zh.javascript.info/event-delegation"
+          },
+          {
+            "id": "default-browser-action",
+            "title": "浏览器默认行为",
+            "url": "https://zh.javascript.info/default-browser-action"
+          },
+          {
+            "id": "dispatch-events",
+            "title": "创建自定义事件",
+            "url": "https://zh.javascript.info/dispatch-events"
+          }
+        ]
+      },
+      {
+        "id": "event-details",
+        "title": "UI 事件",
+        "url": "https://zh.javascript.info/event-details",
+        "lessons": [
+          {
+            "id": "mouse-events-basics",
+            "title": "鼠标事件",
+            "url": "https://zh.javascript.info/mouse-events-basics"
+          },
+          {
+            "id": "mousemove-mouseover-mouseout-mouseenter-mouseleave",
+            "title": "移动鼠标：mouseover/out，mouseenter/leave",
+            "url": "https://zh.javascript.info/mousemove-mouseover-mouseout-mouseenter-mouseleave"
+          },
+          {
+            "id": "mouse-drag-and-drop",
+            "title": "鼠标拖放事件",
+            "url": "https://zh.javascript.info/mouse-drag-and-drop"
+          },
+          {
+            "id": "pointer-events",
+            "title": "指针事件",
+            "url": "https://zh.javascript.info/pointer-events"
+          },
+          {
+            "id": "keyboard-events",
+            "title": "键盘：keydown 和 keyup",
+            "url": "https://zh.javascript.info/keyboard-events"
+          },
+          {
+            "id": "onscroll",
+            "title": "滚动",
+            "url": "https://zh.javascript.info/onscroll"
+          }
+        ]
+      },
+      {
+        "id": "forms-controls",
+        "title": "表单，控件",
+        "url": "https://zh.javascript.info/forms-controls",
+        "lessons": [
+          {
+            "id": "form-elements",
+            "title": "表单属性和方法",
+            "url": "https://zh.javascript.info/form-elements"
+          },
+          {
+            "id": "focus-blur",
+            "title": "聚焦：focus/blur",
+            "url": "https://zh.javascript.info/focus-blur"
+          },
+          {
+            "id": "events-change-input",
+            "title": "事件：change，input，cut，copy，paste",
+            "url": "https://zh.javascript.info/events-change-input"
+          },
+          {
+            "id": "forms-submit",
+            "title": "表单：事件和方法提交",
+            "url": "https://zh.javascript.info/forms-submit"
+          }
+        ]
+      },
+      {
+        "id": "loading",
+        "title": "加载文档和其他资源",
+        "url": "https://zh.javascript.info/loading",
+        "lessons": [
+          {
+            "id": "onload-ondomcontentloaded",
+            "title": "页面生命周期：DOMContentLoaded，load，beforeunload，unload",
+            "url": "https://zh.javascript.info/onload-ondomcontentloaded"
+          },
+          {
+            "id": "script-async-defer",
+            "title": "脚本：async，defer",
+            "url": "https://zh.javascript.info/script-async-defer"
+          },
+          {
+            "id": "onload-onerror",
+            "title": "资源加载：onload，onerror",
+            "url": "https://zh.javascript.info/onload-onerror"
+          }
+        ]
+      },
+      {
+        "id": "ui-misc",
+        "title": "杂项",
+        "url": "https://zh.javascript.info/ui-misc",
+        "lessons": [
+          {
+            "id": "mutation-observer",
+            "title": "DOM 变动观察器（Mutation observer）",
+            "url": "https://zh.javascript.info/mutation-observer"
+          },
+          {
+            "id": "selection-range",
+            "title": "选择（Selection）和范围（Range）",
+            "url": "https://zh.javascript.info/selection-range"
+          },
+          {
+            "id": "event-loop",
+            "title": "事件循环：微任务和宏任务",
+            "url": "https://zh.javascript.info/event-loop"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "其他文章",
+    "chapters": [
+      {
+        "id": "frames-and-windows",
+        "title": "Frame 和 window",
+        "url": "https://zh.javascript.info/frames-and-windows",
+        "lessons": [
+          {
+            "id": "popup-windows",
+            "title": "弹窗和 window 的方法",
+            "url": "https://zh.javascript.info/popup-windows"
+          },
+          {
+            "id": "cross-window-communication",
+            "title": "跨窗口通信",
+            "url": "https://zh.javascript.info/cross-window-communication"
+          },
+          {
+            "id": "clickjacking",
+            "title": "点击劫持攻击",
+            "url": "https://zh.javascript.info/clickjacking"
+          }
+        ]
+      },
+      {
+        "id": "binary",
+        "title": "二进制数据，文件",
+        "url": "https://zh.javascript.info/binary",
+        "lessons": [
+          {
+            "id": "arraybuffer-binary-arrays",
+            "title": "ArrayBuffer，二进制数组",
+            "url": "https://zh.javascript.info/arraybuffer-binary-arrays"
+          },
+          {
+            "id": "text-decoder",
+            "title": "TextDecoder 和 TextEncoder",
+            "url": "https://zh.javascript.info/text-decoder"
+          },
+          {
+            "id": "blob",
+            "title": "Blob",
+            "url": "https://zh.javascript.info/blob"
+          },
+          {
+            "id": "file",
+            "title": "File 和 FileReader",
+            "url": "https://zh.javascript.info/file"
+          }
+        ]
+      },
+      {
+        "id": "network",
+        "title": "网络请求",
+        "url": "https://zh.javascript.info/network",
+        "lessons": [
+          {
+            "id": "fetch",
+            "title": "Fetch",
+            "url": "https://zh.javascript.info/fetch"
+          },
+          {
+            "id": "formdata",
+            "title": "FormData",
+            "url": "https://zh.javascript.info/formdata"
+          },
+          {
+            "id": "fetch-progress",
+            "title": "Fetch：下载进度",
+            "url": "https://zh.javascript.info/fetch-progress"
+          },
+          {
+            "id": "fetch-abort",
+            "title": "Fetch：中止（Abort）",
+            "url": "https://zh.javascript.info/fetch-abort"
+          },
+          {
+            "id": "fetch-crossorigin",
+            "title": "Fetch：跨源请求",
+            "url": "https://zh.javascript.info/fetch-crossorigin"
+          },
+          {
+            "id": "fetch-api",
+            "title": "Fetch API",
+            "url": "https://zh.javascript.info/fetch-api"
+          },
+          {
+            "id": "url",
+            "title": "URL 对象",
+            "url": "https://zh.javascript.info/url"
+          },
+          {
+            "id": "xmlhttprequest",
+            "title": "XMLHttpRequest",
+            "url": "https://zh.javascript.info/xmlhttprequest"
+          },
+          {
+            "id": "resume-upload",
+            "title": "可恢复的文件上传",
+            "url": "https://zh.javascript.info/resume-upload"
+          },
+          {
+            "id": "long-polling",
+            "title": "长轮询（Long polling）",
+            "url": "https://zh.javascript.info/long-polling"
+          },
+          {
+            "id": "websocket",
+            "title": "WebSocket",
+            "url": "https://zh.javascript.info/websocket"
+          },
+          {
+            "id": "server-sent-events",
+            "title": "Server Sent Events",
+            "url": "https://zh.javascript.info/server-sent-events"
+          }
+        ]
+      },
+      {
+        "id": "data-storage",
+        "title": "在浏览器中存储数据",
+        "url": "https://zh.javascript.info/data-storage",
+        "lessons": [
+          {
+            "id": "cookie",
+            "title": "Cookie，document.cookie",
+            "url": "https://zh.javascript.info/cookie"
+          },
+          {
+            "id": "localstorage",
+            "title": "LocalStorage，sessionStorage",
+            "url": "https://zh.javascript.info/localstorage"
+          },
+          {
+            "id": "indexeddb",
+            "title": "IndexedDB",
+            "url": "https://zh.javascript.info/indexeddb"
+          }
+        ]
+      },
+      {
+        "id": "animation",
+        "title": "动画",
+        "url": "https://zh.javascript.info/animation",
+        "lessons": [
+          {
+            "id": "bezier-curve",
+            "title": "贝塞尔曲线",
+            "url": "https://zh.javascript.info/bezier-curve"
+          },
+          {
+            "id": "css-animations",
+            "title": "CSS 动画",
+            "url": "https://zh.javascript.info/css-animations"
+          },
+          {
+            "id": "js-animation",
+            "title": "JavaScript 动画",
+            "url": "https://zh.javascript.info/js-animation"
+          }
+        ]
+      },
+      {
+        "id": "web-components",
+        "title": "Web components",
+        "url": "https://zh.javascript.info/web-components",
+        "lessons": [
+          {
+            "id": "webcomponents-intro",
+            "title": "从星球轨道的高度讲起",
+            "url": "https://zh.javascript.info/webcomponents-intro"
+          },
+          {
+            "id": "custom-elements",
+            "title": "Custom elements",
+            "url": "https://zh.javascript.info/custom-elements"
+          },
+          {
+            "id": "shadow-dom",
+            "title": "影子 DOM（Shadow DOM）",
+            "url": "https://zh.javascript.info/shadow-dom"
+          },
+          {
+            "id": "template-element",
+            "title": "模板元素",
+            "url": "https://zh.javascript.info/template-element"
+          },
+          {
+            "id": "slots-composition",
+            "title": "Shadow DOM 插槽，组成",
+            "url": "https://zh.javascript.info/slots-composition"
+          },
+          {
+            "id": "shadow-dom-style",
+            "title": "给 Shadow DOM 添加样式",
+            "url": "https://zh.javascript.info/shadow-dom-style"
+          },
+          {
+            "id": "shadow-dom-events",
+            "title": "Shadow DOM 和事件（events）",
+            "url": "https://zh.javascript.info/shadow-dom-events"
+          }
+        ]
+      },
+      {
+        "id": "regular-expressions",
+        "title": "正则表达式",
+        "url": "https://zh.javascript.info/regular-expressions",
+        "lessons": [
+          {
+            "id": "regexp-introduction",
+            "title": "模式（Patterns）和修饰符（flags）",
+            "url": "https://zh.javascript.info/regexp-introduction"
+          },
+          {
+            "id": "regexp-character-classes",
+            "title": "字符类",
+            "url": "https://zh.javascript.info/regexp-character-classes"
+          },
+          {
+            "id": "regexp-unicode",
+            "title": "Unicode：修饰符 \"u\" 和类 \\p{...}",
+            "url": "https://zh.javascript.info/regexp-unicode"
+          },
+          {
+            "id": "regexp-anchors",
+            "title": "锚点：字符串开始 ^ 和末尾 $",
+            "url": "https://zh.javascript.info/regexp-anchors"
+          },
+          {
+            "id": "regexp-multiline-mode",
+            "title": "锚点 ^ $ 的多行模式，修饰符 \"m\"",
+            "url": "https://zh.javascript.info/regexp-multiline-mode"
+          },
+          {
+            "id": "regexp-boundary",
+            "title": "词边界：\\b",
+            "url": "https://zh.javascript.info/regexp-boundary"
+          },
+          {
+            "id": "regexp-escaping",
+            "title": "转义，特殊字符",
+            "url": "https://zh.javascript.info/regexp-escaping"
+          },
+          {
+            "id": "regexp-character-sets-and-ranges",
+            "title": "集合和范围 [...]",
+            "url": "https://zh.javascript.info/regexp-character-sets-and-ranges"
+          },
+          {
+            "id": "regexp-quantifiers",
+            "title": "量词 +, *, ? 和 {n}",
+            "url": "https://zh.javascript.info/regexp-quantifiers"
+          },
+          {
+            "id": "regexp-greedy-and-lazy",
+            "title": "贪婪量词和惰性量词",
+            "url": "https://zh.javascript.info/regexp-greedy-and-lazy"
+          },
+          {
+            "id": "regexp-groups",
+            "title": "捕获组",
+            "url": "https://zh.javascript.info/regexp-groups"
+          },
+          {
+            "id": "regexp-backreferences",
+            "title": "模式中的反向引用：\\N 和 \\k<name>",
+            "url": "https://zh.javascript.info/regexp-backreferences"
+          },
+          {
+            "id": "regexp-alternation",
+            "title": "选择 (OR) |",
+            "url": "https://zh.javascript.info/regexp-alternation"
+          },
+          {
+            "id": "regexp-lookahead-lookbehind",
+            "title": "前瞻断言与后瞻断言",
+            "url": "https://zh.javascript.info/regexp-lookahead-lookbehind"
+          },
+          {
+            "id": "regexp-catastrophic-backtracking",
+            "title": "灾难性回溯",
+            "url": "https://zh.javascript.info/regexp-catastrophic-backtracking"
+          },
+          {
+            "id": "regexp-sticky",
+            "title": "粘性修饰符 \"y\"，在位置处搜索",
+            "url": "https://zh.javascript.info/regexp-sticky"
+          },
+          {
+            "id": "regexp-methods",
+            "title": "正则表达式和字符串的方法",
+            "url": "https://zh.javascript.info/regexp-methods"
+          }
+        ]
+      }
+    ]
+  }
+]

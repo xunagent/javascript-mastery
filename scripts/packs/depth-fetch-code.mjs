@@ -1,0 +1,25 @@
+export function addFetchDepthCodeExercises({ code }) {
+  code('fetch-depth-code-01', 'fetch', '主接口失败时按状态切换备用接口',
+    '实现 async fetchWithFallback(fetchImpl,primary,backup)：先请求 primary。网络错误或 HTTP 5xx 时改请求 backup；HTTP 4xx 不重试，抛出含状态码的 Error。成功响应只解析一次 JSON 并返回数据；备用接口失败时把错误向外抛出。',
+    'async function fetchWithFallback(fetchImpl, primary, backup) {\n  // 在这里实现\n}',
+    [['主接口成功不访问备用', 'return (async()=>{const calls=[];const fetchImpl=async url=>{calls.push(url);return {ok:true,status:200,json:async()=>({from:url})}};assert.deepEqual(await fetchWithFallback(fetchImpl,"/a","/b"),{from:"/a"});assert.deepEqual(calls,["/a"])})()'], ['网络错误与服务端错误切换备用', 'return (async()=>{const calls=[];const fetchImpl=async url=>{calls.push(url);if(url==="/a")throw new TypeError("network");return {ok:true,status:200,json:async()=>({ok:true})}};assert.deepEqual(await fetchWithFallback(fetchImpl,"/a","/b"),{ok:true});assert.deepEqual(calls,["/a","/b"]);const other=async url=>url==="/a"?{ok:false,status:503}:{ok:true,status:200,json:async()=>7};assert.equal(await fetchWithFallback(other,"/a","/b"),7)})()'], ['客户端错误不切换', 'return (async()=>{const calls=[];let failed=false;try{await fetchWithFallback(async url=>{calls.push(url);return {ok:false,status:404}},"/a","/b")}catch(e){failed=e instanceof Error && e.message.includes("404")}assert.ok(failed);assert.deepEqual(calls,["/a"])})()'], ['备用接口失败不无限重试', 'return (async()=>{const calls=[];let failed=false;try{await fetchWithFallback(async url=>{calls.push(url);return {ok:false,status:503}},"/a","/b")}catch(e){failed=e.message.includes("503")}assert.ok(failed);assert.deepEqual(calls,["/a","/b"])})()']],
+    ['先区分网络 reject 与已有 HTTP Response。', '只有网络失败或 5xx 使用备用地址。', '成功时只调用一次 json()，4xx 抛出含状态的错误。'],
+    'async function fetchWithFallback(fetchImpl, primary, backup) {\n  let response;\n  let usedBackup=false;\n  try{response=await fetchImpl(primary)}catch{usedBackup=true;response=await fetchImpl(backup)}\n  if(!usedBackup && !response.ok && response.status>=500) response=await fetchImpl(backup);\n  if(!response.ok) throw new Error(`HTTP ${response.status}`);\n  return response.json();\n}',
+    'fetch 只会因网络层失败而 reject，4xx/5xx 仍给出 Response。备用接口仅用于网络或服务器故障，成功后只消费一次响应体。');
+
+  code('formdata-depth-code-01', 'formdata', '构造带重复标签的上传表单',
+    '实现 buildUploadData(title,tags,blob)：返回 FormData，包含一个 title 字段、按顺序重复的 tag 字段，以及名为 attachment 的文件字段，文件名固定为 "upload.bin"。title 按原字符串传入，不要手动设置 multipart Content-Type。',
+    'function buildUploadData(title, tags, blob) {\n  // 在这里实现\n}',
+    [['重复字段保留顺序', 'const data=buildUploadData(" 记录 ",["js","dom","js"],new Blob(["x"]));assert.equal(data.get("title")," 记录 ");assert.deepEqual(data.getAll("tag"),["js","dom","js"])'], ['附件及空标签', 'const blob=new Blob(["abc"],{type:"application/octet-stream"});const data=buildUploadData("x",[],blob);assert.deepEqual(data.getAll("tag"),[]);const file=data.get("attachment");assert.ok(file instanceof Blob);assert.equal(file.size,3);assert.equal(file.name,"upload.bin")']],
+    ['new FormData() 创建表单数据。', '对 tags 中每个值调用 append("tag",tag)，不要用 set 覆盖重复字段。', 'append 附件时第三参数可指定文件名。'],
+    'function buildUploadData(title, tags, blob) {\n  const data=new FormData();\n  data.append("title",title);\n  for(const tag of tags) data.append("tag",tag);\n  data.append("attachment",blob,"upload.bin");\n  return data;\n}',
+    'FormData.append 保留同名字段，适合多标签与文件上传；浏览器会在发送时自动生成 multipart 边界。');
+
+  code('fetch-abort-depth-code-01', 'fetch-abort', '只采用最后一次搜索的响应',
+    '实现 createLatestLoader(fetchImpl)：返回 async load(query)。新请求开始时中止旧请求；旧请求即使忽略取消并晚返回，也只能得到 null，不能作为最新结果。最新请求返回解析后的 JSON。AbortError 转成 null，其他错误继续抛出。',
+    'function createLatestLoader(fetchImpl) {\n  // 在这里实现\n}',
+    [['中止旧请求且丢弃迟到结果', 'return (async()=>{const requests=[];const fetchImpl=(q,{signal})=>new Promise(resolve=>requests.push({q,signal,resolve}));const load=createLatestLoader(fetchImpl);const first=load("a");const second=load("b");assert.equal(requests[0].signal.aborted,true);requests[1].resolve({json:async()=>"B"});requests[0].resolve({json:async()=>"A"});assert.equal(await second,"B");assert.equal(await first,null)})()'], ['AbortError 与其他错误', 'return (async()=>{let error;const load=createLatestLoader(async()=>{throw Object.assign(new Error("stop"),{name:"AbortError"})});assert.equal(await load("x"),null);try{await createLatestLoader(async()=>{throw new Error("boom")})("x")}catch(e){error=e}assert.equal(error.message,"boom")})()']],
+    ['在闭包中保存当前 AbortController 和递增请求编号。', '开始新请求先 abort 旧控制器。', '读取 JSON 后仍比较编号，防止请求方忽略 signal。'],
+    'function createLatestLoader(fetchImpl) {\n  let controller=null;\n  let latest=0;\n  return async function load(query){\n    controller?.abort();\n    controller=new AbortController();\n    const id=++latest;\n    try{\n      const response=await fetchImpl(query,{signal:controller.signal});\n      const value=await response.json();\n      return id===latest?value:null;\n    }catch(error){\n      if(error?.name==="AbortError") return null;\n      throw error;\n    }\n  };\n}',
+    'AbortController 取消旧请求，编号检查解决服务端或模拟请求忽略取消时的迟到响应；只有最新结果能更新界面。');
+}

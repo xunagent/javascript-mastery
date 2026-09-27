@@ -1,0 +1,37 @@
+export function addRegexAdvancedExpansion({choice}){
+ const cases=[
+  ['regexp-greedy-and-lazy','贪婪匹配会尽量延伸到最后的终止符','匹配片段是什么？','"a1b2b".match(/a.*b/)[0]',['"a1b2b"','"a1b"','"a"','"b2b"'],'.* 默认贪婪|从第一个 a 开始|最后一个 b 仍可满足后缀','贪婪量词先尽量扩展，最终匹配到最后一个 b。'],
+  ['regexp-greedy-and-lazy','惰性匹配先尝试最近的终止符','匹配片段是什么？','"a1b2b".match(/a.*?b/)[0]',['"a1b"','"a1b2b"','"a"','"b2b"'],'*? 尽量少消费|但后面必须匹配 b|首个 b 即可结束','惰性量词在首个可满足后续模式的 b 处停止。'],
+  ['regexp-greedy-and-lazy','惰性星号可以匹配零字符','结果是什么？','"ab".match(/a.*?b/)[0]',['"ab"','null','"a"','空字符串'],'* 允许零次|a 后立刻就是 b|无需中间字符','惰性星号可消费零个字符，整段仍匹配 ab。'],
+  ['regexp-greedy-and-lazy','惰性仍须满足后续部分','匹配片段是什么？','"a1b2c".match(/a.*?c/)[0]',['"a1b2c"','"a1b"','"a"','null'],'*? 从最短尝试|只有最后的 c 可满足后缀|会逐步扩大','惰性不等于固定短长度；为找到 c 仍会扩展。'],
+  ['regexp-groups','命名捕获组通过 groups 读取','结果是什么？','/(?<year>\\d{4})-(?<month>\\d{2})/.exec("2025-09").groups.month',['"09"','9','"2025"','undefined'],'命名组形成 groups 属性|捕获内容仍是字符串|month 对应 09','groups.month 为字符串 "09"。'],
+  ['regexp-groups','非捕获组不占编号','结果是什么？','/(?:ab)(c)/.exec("abc")[1]',['"c"','"ab"','"abc"','undefined'],'(?:ab) 只分组不捕获|第 1 捕获组是 (c)|完整匹配位于索引 0','第一个编号捕获组为 c。'],
+  ['regexp-groups','可选组未出现时返回 undefined','第二个捕获值是什么？','/(a)(b)?/.exec("a")[2]',['undefined','空字符串','null','"b"'],'(b)? 可以不参与|未参与的捕获值是 undefined|与匹配空字符串不同','可选组未参与时捕获位置为 undefined。'],
+  ['regexp-groups','分组可限定量词作用范围','哪项匹配 /^(ha){2}$/？','/^(ha){2}$/.test(value)',['"haha"','"haa"','"ha"','"hhaa"'],'(ha) 是一个整体|重复两次|首尾锚点限定整串','两次 ha 拼成 haha。'],
+  ['regexp-backreferences','编号反向引用要求重复同一文本','结果是什么？','/^(\\d{2})-\\1$/.test("42-42")',['true','false','只在 g 下 true','SyntaxError'],'第一组捕获 42|\\1 再要求相同文本|后半段也是 42','反向引用匹配第一次捕获的 42。'],
+  ['regexp-backreferences','反向引用不只是同类型字符','结果是什么？','/^(\\d{2})-\\1$/.test("42-24")',['false','true；两边都是两位数字','只在 i 下 true','SyntaxError'],'\\1 要求字符序列完全相同|24 虽也是两位数却不同于 42|分组模式不会重新执行','反向引用比较捕获文本而非重跑数字模式。'],
+  ['regexp-backreferences','命名反向引用可约束配对符','结果是什么？','/^(?<q>["\\x27]).*\\k<q>$/.test("\\x27ok\\x27")',['true','false','只在 m 下 true','SyntaxError'],'q 捕获开头引号|\\k<q> 要求同一种结束引号|示例两端均单引号','命名反向引用确保首尾引号类型一致。'],
+  ['regexp-backreferences','不区分大小写标志影响反向引用比较','结果是什么？','/^(a)\\1$/i.test("aA")',['true','false','只在 u 下 true','SyntaxError'],'i 使匹配忽略大小写|反向引用同样受该模式标志影响|A 可与 a 对应','i 模式下反向引用可匹配大小写不同的对应字母。'],
+  ['regexp-alternation','左侧分支优先于右侧分支','匹配文本是什么？','"ab".match(/a|ab/)[0]',['"a"','"ab"','空字符串','null'],'两分支从同一位置匹配|引擎先尝试左边 a|成功就返回','左分支已成功，正则不会为了更长结果再选 ab。'],
+  ['regexp-alternation','改变分支顺序可改变匹配结果','匹配文本是什么？','"ab".match(/ab|a/)[0]',['"ab"','"a"','空字符串','null'],'从左向右尝试分支|第一个 ab 成功|不会继续右分支','先写较长分支时该例匹配 ab。'],
+  ['regexp-alternation','公共前后缀需分组选择部分','只允许 cat! 或 dog!，哪个模式正确？','value 是整串',['/^(cat|dog)!$/','/^cat|dog!$/','/^cat|dog!$|fish$/','/^catdog!$/'],'选择运算符的优先级低于拼接|括号限定选择范围|锚点约束整串','分组后公共 ! 同时应用于两个候选词。'],
+  ['regexp-alternation','空分支可以匹配空串','结果是什么？','/^(yes|)$/.test("")',['true','false','SyntaxError','只在 m 下 true'],'右侧分支是空模式|可消费零字符|首尾锚点仍可同时满足','空分支允许空字符串通过。'],
+  ['regexp-lookahead-lookbehind','正向前瞻只检查后续内容','匹配结果是什么？','"cat!".match(/cat(?=!)/)[0]',['"cat"','"cat!"','"!"','null'],'(?=!) 要求后面是感叹号|断言不消费该字符|匹配主体是 cat','前瞻验证 !，但结果不包含它。'],
+  ['regexp-lookahead-lookbehind','负向前瞻排除特定后缀','哪项被 /^foo(?!bar)/ 匹配？','/^foo(?!bar)/.test(value)',['"foobaz"','"foobar"','"foo" 和 "foobar" 都不匹配','任何文本都不匹配'],'(?!bar) 要求 foo 后面不是 bar|baz 满足|foobar 被排除','负向前瞻阻止紧随 bar 的 foo 命中。'],
+  ['regexp-lookahead-lookbehind','正向后瞻不进入匹配结果','匹配片段是什么？','"$42".match(/(?<=\\$)\\d+/)[0]',['"42"','"$42"','"$"','null'],'后瞻检查左侧美元符号|不消费到结果中|\\d+ 消费两位数字','正向后瞻限定前缀但结果只含 42。'],
+  ['regexp-lookahead-lookbehind','负向后瞻排除前缀','哪项会通过 /(?<!\\$)\\d+/ 的整段前缀约束？','用 /^...$/ 组合验证一个整数',['"42"','"$42"','"$99"','"$0"'],'负向后瞻要求数字前不是美元符号|普通整数无此符号|需要锚点做整段验证','无美元前缀的 42 可通过该条件。'],
+  ['regexp-catastrophic-backtracking','嵌套重复在失败输入上可能爆炸','哪个模式最需要审查？','对很长的 a...a! 字符串做 test',['/^(a+)+$/','/^a+!$/','/^[a]+!$/','/^a{1,20}!$/'],'内外两层重复可以用多种方式切分同一串|末尾失败触发大量重试|简单线性模式更稳妥','嵌套量词 (a+)+ 在失败输入上可能出现灾难性回溯。'],
+  ['regexp-catastrophic-backtracking','改成确定的字符集约束','只接受任意个 a 后跟 !，哪种模式更直接？','输入形如 aaa!',['/^a+!$/','/^(a+)+!$/','/^(.+)+!$/','/^(a|aa)+!$/'],'需求只需连续 a|单个 a+ 足够|不要制造同一文本的多种分割','简单字符重复比嵌套重复更明确。'],
+  ['regexp-catastrophic-backtracking','惰性量词不自动消除复杂回溯','把 (a+)+ 全部改成惰性量词能保证线性吗？','/^(a+?)+$/',['不能；嵌套重复仍可有大量切分路径','能；? 一定阻止回溯','只有 g 标志可阻止','只在短输入上不允许匹配'],'惰性只改变尝试顺序|嵌套重复的歧义仍在|失败输入仍可能昂贵','惰性量词不是解决灾难性回溯的充分条件。'],
+  ['regexp-catastrophic-backtracking','输入长度限制降低风险但不修复模式','限制输入最长 20 字符后，可以宣布嵌套重复模式本身已线性吗？','/^(a+)+$/',['不能；限制只是给最坏成本设上界，模式结构仍有回溯问题','能；算法复杂度自动变 O(n)','能；正则会被改写','只有浏览器中能'],'长度限制是防护边界|不改变模式算法结构|仍应使用无歧义模式','长度限制有帮助，但不能把高回溯结构变为线性算法。'],
+  ['regexp-sticky','y 要求从 lastIndex 精确开始','结果是什么？','const r=/a/y;r.lastIndex=1;r.exec("ba")[0]',['"a"','null','"ba"','TypeError'],'y 从指定索引尝试|索引 1 正好是 a|匹配成功','粘性匹配在索引 1 找到 a。'],
+  ['regexp-sticky','y 失败不会向右搜索','结果是什么？','const r=/a/y;r.lastIndex=0;r.exec("ba")',['null','["a"]','"a"','TypeError'],'起点 0 是 b|y 不向索引 1 搜索|失败返回 null','粘性正则只尝试 lastIndex，起点失败即停止。'],
+  ['regexp-sticky','g 会从 lastIndex 往后搜索','结果是什么？','const r=/a/g;r.lastIndex=0;r.exec("ba").index',['1','0','-1','TypeError'],'g 允许向后寻找|第一个 a 在索引 1|exec 返回匹配对象的 index','全局正则从起点向后搜索并在索引 1 命中。'],
+  ['regexp-sticky','粘性失败会重置 lastIndex','失败后 lastIndex 是多少？','const r=/a/y;r.lastIndex=1;r.test("bb");r.lastIndex',['0','1','2','-1'],'y 使用 lastIndex|索引 1 不是 a|失败会重置搜索索引','粘性匹配失败后 lastIndex 重置为 0。'],
+  ['regexp-methods','match 无 g 保留捕获组','捕获组内容是什么？','"x=12".match(/x=(\\d+)/)[1]',['"12"','"x=12"','12','undefined'],'match 无 g 返回匹配数组|索引 0 是完整匹配|索引 1 是括号组','第一个捕获组是字符串 12。'],
+  ['regexp-methods','match 使用 g 返回匹配文本列表','结果是什么？','"a1 b2".match(/\\d/g)',['["1","2"]','["a1","b2"]','["1"]','null'],'g 收集所有命中|\\d 每次消费一位数字|列表中是文本','全局 match 返回两个数字字符的数组。'],
+  ['regexp-methods','replace 回调可用捕获组生成新文本','结果是什么？','"a=2".replace(/(\\w)=(\\d)/,(all,key,value)=>key+":"+(+value*2))',['"a:4"','"a:2"','"a=4"','TypeError'],'回调实参先是完整匹配|随后是两个捕获组|数字 2 乘二','替换回调用 key 与 value 生成 a:4。'],
+  ['regexp-methods','split 的 limit 限制结果数量','结果是什么？','"a,b,c".split(",",2)',['["a","b"]','["a","b","c"]','["a","b,c"]','["b","c"]'],'第二参数限制返回数组长度|按逗号拆分|只保留前两项','split 限制输出为前两个字段。']
+ ];
+ const counts=new Map();for(const [lesson,title,prompt,example,options,hints,explanation] of cases){const n=(counts.get(lesson)||0)+1;counts.set(lesson,n);choice(lesson+'-exp-'+String(n).padStart(2,'0'),lesson,title,prompt,example,options,0,hints.split(/(?<!\|)\|(?!\|)/),explanation,'中等');}
+}

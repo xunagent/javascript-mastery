@@ -1,0 +1,57 @@
+export function addDataTypesExpansion({ choice }) {
+  const cases = [
+    ['primitives-methods','包装对象始终是真值','哪段代码会进入 if？','if(new Boolean(false)){run()}',["会，包装对象本身是真值","不会，因为包装的值为 false","只有严格模式会","创建对象时抛错"],'布尔转换先看对象身份|对象通常都是真值|不要用 new Boolean 表示布尔值','new Boolean(false) 是对象，在条件中为真值。'],
+    ['primitives-methods','原始数值临时装箱不保留属性','在非严格模式脚本中，第二次读取 n.note 的结果是什么？','let n=4;n.note="x";console.log(n.note);',["undefined；写入未保留","x","4","null"],'访问属性时会临时装箱|原始值不会成为持久对象|读取使用新的临时包装','非严格模式下给原始数值写自定义属性不会持久保存；严格模式下写入会报错。'],
+    ['primitives-methods','null 没有包装方法','表达式会怎样？','null.toString()',["抛 TypeError","返回字符串 null","返回 undefined","返回空字符串"],'null 与普通原始值不同|不能对 null 直接访问属性|先显式处理缺失值','null 不能直接调用方法，属性访问会抛 TypeError。'],
+    ['primitives-methods','String 包装对象与原始字符串的类型不同','typeof new String("a") 与 typeof "a" 分别是什么？','console.log(typeof new String("a"),typeof "a");',["object、string","string、string","object、object","function、string"],'new 会创建包装对象|字面量是原始字符串|typeof 区分两者','new String 创建对象，字符串字面量仍是原始值。'],
+    ['number','parseFloat 可读取数值前缀','下面两项结果是什么？','[parseFloat("3.5em"),Number("3.5em")]',["3.5、NaN","NaN、NaN","3.5、3.5","3、NaN"],'parseFloat 可在非法字符处停止|Number 要求整个字符串有效|em 不是数值部分','parseFloat 解析数值前缀得 3.5，Number 对整个字符串转换失败。'],
+    ['number','Math.trunc 与 Math.floor 对负数不同','结果分别是什么？','[Math.trunc(-2.8),Math.floor(-2.8)]',["-2、-3","-3、-3","-2、-2","3、2"],'trunc 朝 0 截断|floor 朝负无穷取整|负数两者不同','-2.8 截断为 -2，向下取整为 -3。'],
+    ['number','Infinity 不等于 NaN','哪组判断为真？','[Number.isFinite(Infinity),Number.isNaN(Infinity),Infinity>1e300]',["false、false、true","true、false、true","false、true、false","true、true、true"],'Infinity 是非有限数|但它不是 NaN|比任何有限正数都大','Infinity 不是有限数也不是 NaN，且大于所有有限值。'],
+    ['number','数值上限后的整数精度','为什么不能把巨大整数 ID 存为 Number？','Number.MAX_SAFE_INTEGER+1 === Number.MAX_SAFE_INTEGER+2',["可能为 true；超出安全整数范围会丢失区分能力","必为 false；Number 精确表示所有整数","会自动转为 BigInt","会抛 RangeError"],'浮点数有效位有限|超过安全整数范围并非每个整数可精确表示|ID 可考虑字符串或 BigInt','超出最大安全整数后相邻整数可能映射为同一个 Number。'],
+    ['string','codePointAt 与索引的 UTF-16 单位','对笑脸 emoji 的长度和首个码点，哪项正确？','const s="😀";[s.length,s.codePointAt(0).toString(16)]',["2、1f600","1、1f600","2、d83d","1、d83d"],'length 统计 UTF-16 代码单元|emoji 使用代理对|codePointAt 读取完整码点','该符号占两个 UTF-16 单元，codePointAt(0) 得 U+1F600。'],
+    ['string','大小写转换不会修改原字符串','最后 name 是什么？','let name="Ada";name.toUpperCase();',["Ada","ADA","ada","undefined"],'字符串不可变|方法返回新字符串|未把返回值赋回 name','toUpperCase 的结果未保存，原变量仍是 Ada。'],
+    ['string','includes 的起始位置影响匹配','结果是什么？','"banana".includes("ana",3)',["true；从索引 3 仍可匹配","false；只会检查索引 1","true；第二参数代表最大长度","TypeError"],'第二参数是搜索起始索引|banana 的索引 3 开始是 ana|匹配可从索引 3 开始','从索引 3 搜索仍能找到 ana。'],
+    ['string','Unicode 规范化修复视觉相同文本比较','两个视觉相同的 é 字符串如何稳定比较？','const a="é",b="e\u0301";',["先对两者调用 normalize，再比较","直接 a===b 必为 true","仅调用 toLowerCase","比较 length 即可"],'组合字符可有不同编码序列|规范化把等价形式统一|大小写转换不是规范化','a 与 b 的编码序列不同，normalize 后可按统一形式比较。'],
+    ['array','fill 对嵌套对象复用同一引用','修改第一个元素后，第二个元素的 x 是什么？','const a=Array(2).fill({x:0});a[0].x=9;',["9","0","undefined","TypeError"],'fill 接收同一个对象值|两个位置指向同一对象|属性修改对两处可见','fill 没有分别创建对象，两个位置共享引用。'],
+    ['array','at 可从末尾索引','表达式结果是什么？','[10,20,30].at(-2)',["20","30","undefined","10"],'at 接受负下标| -1 是最后一项| -2 是倒数第二项','倒数第二项是 20。'],
+    ['array','切片只做浅层复制','复制数组后修改内层对象会怎样？','const a=[{x:1}];const b=a.slice();b[0].x=7;',["a[0].x 也变为 7","a[0].x 仍是 1","slice 抛 TypeError","b[0] 变成新对象"],'slice 创建新外层数组|元素对象引用仍相同|修改对象属性会共享','浅复制不复制内层对象，两个数组的元素指向同一对象。'],
+    ['array','Array.from 会访问稀疏位置','结果是否仍是空位？','const a=Array(2);const b=Array.from(a);',["不是；b 有两个值为 undefined 的元素","是；b 保留两个空位","b 是空数组","b 只有一个 undefined"],'原数组有长度但没有元素属性|Array.from 按索引生成值|缺失属性读取为 undefined','Array.from 将两个空位变成显式的 undefined 元素。'],
+    ['array-methods','reduce 空数组没有初值会抛错','表达式结果是什么？','[].reduce((sum,x)=>sum+x)',["抛 TypeError","0","undefined","NaN"],'reduce 需要初始累积值|空数组无法从首项取初值|提供 0 可正常返回 0','空数组且没有初值时 reduce 无法初始化累加器。'],
+    ['array-methods','flatMap 只展开一级','结果是什么？','[1,2].flatMap(x=>[[x,x]])',["[[1,1],[2,2]]","[1,1,2,2]","[[[1,1]],[[2,2]]]","[1,2]"],'回调返回二维数组|flatMap 只展开返回值的最外一层|每个内层数组仍作为元素','flatMap 相当于 map 后展开一级，内层 [x,x] 被保留。'],
+    ['array-methods','find 返回值而 findIndex 返回位置','没有匹配项时两者分别返回什么？','[1,2].find(x=>x>9);[1,2].findIndex(x=>x>9);',["undefined、-1","-1、-1","undefined、undefined","null、-1"],'find 返回元素本身|findIndex 返回索引|没有匹配时采用不同哨兵值','find 得 undefined，findIndex 得 -1。'],
+    ['array-methods','sort 默认按字符串比较','默认排序后数组是什么？','[2,10,1].sort()',["[1,10,2]","[1,2,10]","[2,10,1]","抛 TypeError"],'默认比较基于字符串|"10" 排在 "2" 前|数值排序需比较函数','默认排序按字符串顺序，结果是 [1,10,2]。'],
+    ['iterable','扩展语法接受 Map 的迭代项','展开 Map 得到什么？','[...new Map([["a",1],["b",2]])]',['[["a",1],["b",2]]','[1,2]','["a","b"]','TypeError'],'Map 默认迭代键值对|每次迭代值是 [key,value]|数组扩展保留每个迭代值','展开 Map 得到键值对数组。'],
+    ['iterable','Array.from 的映射函数可在收集时处理','结果是什么？','Array.from(new Set([2,3]),x=>x*2)',["[4,6]","[2,3]","Set {4,6}","TypeError"],'Set 可迭代|Array.from 第二参数是映射函数|返回的是数组','Array.from 收集 Set 元素并映射成 [4,6]。'],
+    ['iterable','字符串迭代按码点而非 UTF-16 单元','展开单个 emoji 的结果长度是多少？','[..."😀"].length',["1","2","4","0"],'字符串 length 与迭代规则不同|迭代器按完整码点产出|该 emoji 是一个码点','字符串迭代产出一个 emoji，展开数组长度为 1。'],
+    ['iterable','没有迭代器的类数组不能扩展','下面展开操作会怎样？','const x={0:"a",length:1};[...x]',["抛 TypeError；缺少 Symbol.iterator","得到 ['a']","得到 []","得到 [undefined]"],'length 与索引不足以支持扩展语法|扩展语法寻找迭代器|Array.from 可处理类数组','x 虽然类数组，但不可迭代，扩展语法会失败。'],
+    ['map-set','Set 对 NaN 采用同值零语义','集合大小是多少？','new Set([NaN,NaN]).size',["1","2","0","TypeError"],'Set 能把 NaN 识别为同一个值|重复加入不增加大小|与 NaN===NaN 不同','Set 认为两次 NaN 是重复值，因此 size 为 1。'],
+    ['map-set','Map 删除再插入会移动键顺序','最终键顺序是什么？','const m=new Map([["a",1],["b",2]]);m.delete("a");m.set("a",3);[...m.keys()]',["['b','a']","['a','b']","['b']","['a']"],'Map 保持插入顺序|删除移除原位置|重新插入排到末尾','删除 a 再插入使 a 排在 b 后。'],
+    ['map-set','Map 更新已有键不改变顺序','最终键顺序是什么？','const m=new Map([["a",1],["b",2]]);m.set("a",9);[...m.keys()]',["['a','b']","['b','a']","['a']","['b']"],'set 已有键是更新值|没有删除再插入|原插入位置保留','更新 a 不改变键的插入顺序。'],
+    ['map-set','Set 的 add 返回自身','链式调用后的集合内容是什么？','[...new Set().add(1).add(2).add(1)]',["[1,2]","[1,2,1]","[2,1]","TypeError"],'add 返回 Set 本身可链式调用|重复原始值不增加元素|首次插入顺序保留','Set 依次保留 1、2，最后重复的 1 被忽略。'],
+    ['weakmap-weakset','WeakMap 不能用普通数字作键','这段代码会怎样？','const w=new WeakMap();w.set(1,"x");',["抛 TypeError","成功存储数字键","静默忽略","返回 false"],'弱键需要可作为弱引用的身份|数字原始值不是对象|set 会拒绝无效键','数字原始值不能作为 WeakMap 键。'],
+    ['weakmap-weakset','WeakSet 无法列出全部对象','为什么不能用 [...seen] 导出 WeakSet 内容？','const seen=new WeakSet();',["WeakSet 不提供迭代器，也没有稳定可枚举的成员列表","WeakSet 只能存一个对象","展开会自动得到空数组","对象会立即被删除"],'弱集合不保留可枚举的强成员列表|没有 Symbol.iterator|需自行维护可导出的强引用集合','WeakSet 不能遍历，展开语法会报不可迭代错误。'],
+    ['weakmap-weakset','WeakMap 值可以是普通原始值','哪项操作有效？','const key={};const cache=new WeakMap();cache.set(key,0);',["cache.get(key) 返回 0","set 因值不是对象而失败","get 返回 undefined","has 返回 false"],'限制主要在键|值可为任意 JavaScript 值|0 是有效缓存值','对象键对应的 WeakMap 值可以是数字 0。'],
+    ['weakmap-weakset','WeakSet.delete 返回是否曾存在','结果是什么？','const x={},s=new WeakSet([x]);[s.delete(x),s.has(x)]',["[true,false]","[false,false]","[true,true]","[false,true]"],'delete 返回是否删除成功|删除后 has 不再找到|对象仍由 x 变量引用','删除已存在对象返回 true，之后 has 为 false。'],
+    ['keys-values-entries','Object.keys 不包含继承属性','输出是什么？','const p={a:1},x=Object.create(p);x.b=2;Object.keys(x)',["['b']","['a','b']","['a']","[]"],'Object.keys 只列自身可枚举字符串键|a 位于原型上|b 位于对象自身','只返回自身属性 b。'],
+    ['keys-values-entries','整数样式键在枚举时提前排序','键数组的顺序是什么？','const x={"10":"x","2":"y",a:"z"};Object.keys(x)',["['2','10','a']","['10','2','a']","['a','2','10']","顺序不确定"],'数组索引样式键有特殊顺序|先按数值升序|其他字符串键按插入顺序','整数索引样式键 2、10 先升序列出，再列 a。'],
+    ['keys-values-entries','Object.values 会求值 getter','读取 values 后 hits 是多少？','let hits=0;const x={get a(){hits++;return 4}};Object.values(x);',["1","0","2","TypeError"],'a 是可枚举 getter|取属性值会调用 getter|values 会读取每个纳入的属性','Object.values 读取 a 的值，触发一次 getter。'],
+    ['keys-values-entries','Object.fromEntries 接受任意键值对可迭代对象','结果是什么？','Object.fromEntries(new Map([["x",1],["y",2]]))',["{x:1,y:2}","Map {x=>1,y=>2}","[['x',1],['y',2]]","TypeError"],'Map 默认迭代键值对|fromEntries 消费可迭代键值对|返回普通对象','Map 的条目可直接传入 Object.fromEntries，得到普通对象。'],
+    ['destructuring-assignment','解构已有变量需要括号','已有 let a；要把 obj.a 赋给 a，哪种写法正确？','let a; const obj={a:3};',["({a}=obj);","{a}=obj;","const {a}=obj;","a={a:obj};"],'以 { 开头的语句会被解释为块|括号让它成为赋值表达式|已有 a 不应重新声明','赋值形式的对象解构语句需用括号包起来。'],
+    ['destructuring-assignment','数组空位触发解构默认值','x 和 y 分别是什么？','const [,x=5,y=8]=[1,,null];',["5、null","5、8","undefined、null","1、5"],'跳过首元素|空位读取为 undefined，触发默认值|null 不触发默认值','x 使用默认值 5；y 得到显式 null。'],
+    ['destructuring-assignment','对象剩余属性排除已取键','rest 是什么？','const {id,...rest}={id:1,name:"A",age:2}',["{name:'A',age:2}","{id:1,name:'A',age:2}","{id:1}","undefined"],'id 已被单独取出|剩余语法收集其余自身可枚举属性|生成新外层对象','rest 包含 name 与 age，不含已解构的 id。'],
+    ['destructuring-assignment','函数参数解构的默认对象只处理 undefined','调用 f(null) 会怎样？','function f({x}={}){return x} f(null)',["抛 TypeError","返回 undefined","返回 null","返回空对象"],'默认参数只在实参为 undefined 时生效|null 不触发 {} 默认值|无法从 null 解构属性','显式传 null 不会用默认空对象，解构 null 抛错。'],
+    ['date','Date.UTC 的月份从零开始','这个时间戳代表哪一天？','new Date(Date.UTC(2024,0,1)).toISOString()', ["2024-01-01T00:00:00.000Z","2024-02-01T00:00:00.000Z","2023-12-01T00:00:00.000Z","Invalid Date"],'Date.UTC 月份参数从 0 开始|0 表示一月|toISOString 使用 UTC','Date.UTC(2024,0,1) 表示 2024 年 1 月 1 日 UTC。'],
+    ['date','日期参数溢出会归一化','表达式中的日期是哪一天？','new Date(Date.UTC(2024,1,0)).toISOString().slice(0,10)',["2024-01-31","2024-02-01","2024-02-29","Invalid Date"],'月份 1 表示二月|第 0 天是上个月最后一天|2024 年一月有 31 天','二月第 0 天归一化为一月三十一日。'],
+    ['date','ISO 带 Z 的文本指定 UTC','浏览器所在时区不同，下面时间戳是否相同？','Date.parse("2024-01-01T00:00:00Z")',["相同；Z 指定 UTC 绝对时刻","不同；总按本地时区解析","只能在 UTC 时区解析","结果必为 NaN"],'Z 表示零时区偏移|同一绝对时刻有同一 Unix 时间戳|本地显示可不同','带 Z 的 ISO 文本对应固定 UTC 时刻，时间戳不因本地时区变化。'],
+    ['date','比较 Date 会转换为时间戳','同一时刻的两个 Date 对象如何比较？','const a=new Date(1000),b=new Date(1000);',["a.getTime()===b.getTime() 为 true，a===b 为 false","a===b 为 true","a>b 为 true","两者均无效"],'两个 Date 是不同对象|严格相等比较身份|getTime 提取毫秒时间戳','不同 Date 实例不严格相等，但其时间戳相同。'],
+    ['json','JSON.stringify 不支持 BigInt','下面代码会怎样？','JSON.stringify({id:1n})',["抛 TypeError","得到 '{\"id\":1}'","得到 '{\"id\":\"1n\"}'","得到 '{}'"],'BigInt 不是 JSON 的内建数值类型|stringify 无法直接序列化|需先显式转为字符串等形式','JSON.stringify 遇到 BigInt 会抛 TypeError。'],
+    ['json','replacer 数组可限定对象键','序列化结果是什么？','JSON.stringify({a:1,b:2},["b"])',["'{\"b\":2}'","'{\"a\":1,\"b\":2}'","'[2]'","'{}'"],'第二参数数组是允许的属性名列表|a 不在列表中|b 被保留','属性列表只允许 b 进入输出 JSON。'],
+    ['json','reviver 返回 undefined 会删除属性','解析后对象包含 a 吗？','JSON.parse("{\"a\":1,\"b\":2}",(k,v)=>k==="a"?undefined:v)',["不包含 a；b 仍为 2","包含 a 且值为 undefined","包含 a 且值为 1","解析失败"],'reviver 自底向上处理属性|返回 undefined 会从对象中删掉该属性|其余属性原值返回','reviver 对 a 返回 undefined，使 a 被删除。'],
+    ['json','非有限数字序列化为 null','结果是什么？','JSON.stringify([NaN,Infinity,-Infinity])',["'[null,null,null]'","'[NaN,Infinity,-Infinity]'","'[]'","抛 TypeError"],'JSON 数值不支持 NaN 或 Infinity|数组元素不会简单消失|非有限数用 null 表示','三个非有限数值在 JSON 数组中都序列化为 null。']
+  ];
+  const counts=new Map();
+  for(const [lesson,title,prompt,example,options,hints,explanation] of cases){
+    const n=(counts.get(lesson)||0)+1;counts.set(lesson,n);
+    choice(`${lesson}-exp-${String(n).padStart(2,'0')}`,lesson,title,prompt,example,options,0,hints.split(/(?<!\|)\|(?!\|)/),explanation,'中等');
+  }
+}

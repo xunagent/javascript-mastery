@@ -1,0 +1,23 @@
+export function addGeneratorModuleDepthExercises({ choice }) {
+  const cases = [
+    ['generators','yield* 把内部序列逐项委托出来','外层生成器 yield 0，再 yield* 一个产生 1、2 的生成器，最后 yield 3。展开结果是什么？','function* inner(){yield 1;yield 2}function* outer(){yield 0;yield* inner();yield 3}[...outer()];',['[0,1,2,3]','[0,inner(),3]','[0,[1,2],3]','[1,2]'],['yield* 会委托迭代，而非产出迭代器对象。','内部的两个值按顺序流出。','外层随后继续执行。'],'yield* 逐个转发内部生成器的值，展开得到 0、1、2、3。'],
+    ['generators','生成器 return 值不进入 for...of','生成器 yield 1 后 return 2。展开该生成器会得到什么？','function* make(){yield 1;return 2}[...make()];',['[1]','[1,2]','[2]','[]'],['for...of 只消费 done:false 的值。','return 让迭代结束并给出 done:true。','结束值不会成为普通迭代项。'],'return 的 2 是完成值，不会进入展开结果；只有 yield 的 1。'],
+    ['async-iterators-generators','for await 可以等待同步可迭代值中的 Promise','同步数组中有两个 Promise 值，用 for await...of 收集后通常得到什么？','const values=[Promise.resolve(1),Promise.resolve(2)];const out=[];for await(const x of values)out.push(x);',['[1,2]','两个 Promise 对象本身','空数组','抛 TypeError，因为数组不是异步可迭代'],['for await 可接收同步可迭代对象。','循环会等待每个得到的 Promise 值。','得到完成值后进入循环体。'],'for await 可遍历普通数组，并等待其中 Promise 的完成值。'],
+    ['async-iterators-generators','普通 for...of 不能直接消费纯异步迭代器','对象只定义 Symbol.asyncIterator，没有 Symbol.iterator。直接用 for...of 遍历会怎样？','const source={[Symbol.asyncIterator]:async function*(){yield 1}};for(const x of source){}',['抛 TypeError；应使用 for await...of','得到 1','得到 Promise 对象','静默跳过全部元素'],['for...of 使用同步迭代协议。','这里只有异步迭代协议。','for await...of 才能消费。'],'仅有 Symbol.asyncIterator 的对象不能直接用于同步 for...of。'],
+    ['modules-intro','模块依赖先于导入方执行','app.js 静态导入 setup.js，setup.js 顶层先写入配置。app.js 顶层读取配置时，正常执行顺序如何？','app.js: import "./setup.js"; readConfig();',['先执行 setup.js 的初始化，再执行 app.js 顶层读取','先执行 app.js，再执行 setup.js','两个模块的顶层语句无顺序并发执行','静态导入语句只声明类型，不会加载模块'],['静态导入建立模块依赖图。','依赖模块需先完成求值。','导入方随后执行顶层代码。'],'模块图会先求值依赖模块，再运行导入方的顶层代码。'],
+    ['modules-intro','模块顶层的 this','ES module 顶层直接求值 this，结果是什么？','// module.js\nconsole.log(this);',['undefined','window','globalThis','module.exports'],['模块默认严格模式。','模块顶层 this 不自动指向全局对象。','访问全局对象可显式用 globalThis。'],'ES module 顶层 this 为 undefined。'],
+    ['modules-intro','模块内声明不会自动暴露给其他文件','a.js 顶层声明 const secret=7，但没有 export。b.js 能否仅通过加载 a.js 就直接按名称导入 secret？','',['不能；a.js 必须显式导出该绑定','能；所有顶层 const 都自动导出','能；只要文件在同一目录','不能；模块完全不允许跨文件共享值'],['模块顶层有独立作用域。','导入需要匹配明确的导出。','路径相邻不代表可见。'],'未 export 的模块绑定不会自动成为其他模块的导入。'],
+    ['import-export','从聚合模块显式转发默认导出','utils.js 有 export default function parse(){}；index.js 要把它作为命名导出 parse 提供给调用方。哪行代码应放在 index.js？','',['export { default as parse } from "./utils.js";','export * from "./utils.js";','import parse from "./utils.js";','export default as parse from "./utils.js";'],['export * 不会自动转发默认导出。','单独 import 也不会对外导出。','可在 export 的花括号里把 default 重命名为 parse。'],'export { default as parse } from ... 可把被聚合模块的默认导出转发为命名导出。'],
+    ['import-export','命名空间对象的导出属性不可随意重写','import * as api 得到模块命名空间对象，调用方能否直接写 api.version=3 来改变导出模块的绑定？','',['不能；导入方不能通过命名空间属性赋值改写导出绑定','能；命名空间对象是普通可写对象','能；但只在严格模式','能；会自动修改所有模块的本地 const'],['模块命名空间暴露导出绑定。','导入方只能读取，不能直接赋值修改。','修改应由导出模块提供函数或内部逻辑。'],'模块命名空间属性不能由导入方随意赋值；导出模块控制自己的状态。'],
+    ['import-export','默认导出的本地名称可自定','模块 export default 一个函数，两个导入方分别写 import run 与 import execute。它们是否都可指向同一默认导出？','',['可以；默认导入的本地名字由导入方选择','不可以；必须与导出函数声明名完全相同','只有第一个导入方能成功','默认导出不能是函数'],['默认导出在一个模块中只有一个。','导入方给它起本地名字。','不同文件可用不同本地名。'],'默认导入不要求与源代码中的函数名相同，各导入方可按上下文命名。'],
+    ['modules-dynamic-imports','import() 返回命名空间 Promise','在 async 函数里执行 const mod=await import("./math.js")，mod 通常是什么？','',['包含该模块导出绑定的命名空间对象','模块文件的源代码字符串','一个 HTMLScriptElement','默认导出本身，且无法访问命名导出'],['import() 返回 Promise。','await 后取得模块命名空间。','默认导出通常在 mod.default。'],'动态导入解析后得到模块命名空间对象，可读取命名导出与 default。'],
+    ['modules-dynamic-imports','静态 import 不能放进普通 if 块','要在按钮点击时按需加载编辑器，哪种语法位置正确？','',['点击处理函数里调用 import("./editor.js")','在 if (clicked) { import Editor from "./editor.js" } 中写静态导入','把 import 声明写进普通函数体','先把 import 关键字当字符串传给 eval'],['静态 import 声明有语法位置限制。','动态 import() 是表达式。','它返回 Promise，适合条件加载。'],'条件加载应使用 import() 表达式；静态 import 声明不能放进普通 if 或函数体。'],
+    ['modules-dynamic-imports','动态导入路径按当前模块解析','模块 /app/pages/view.js 中写 import("./panel.js")。通常会解析到哪个相对位置？','',['/app/pages/panel.js','/app/panel.js','当前 HTML 页面的目录下 panel.js','网站根目录 /panel.js'],['相对模块说明符以发起导入的模块 URL 为基准。','view.js 位于 /app/pages/。','./panel.js 与它同目录。'],'动态导入的相对路径按调用它的模块 URL 解析，因此指向 /app/pages/panel.js。']
+  ];
+  const indexes=new Map();
+  for (const [lessonId,title,prompt,example,options,hints,explanation] of cases) {
+    const index=(indexes.get(lessonId)||0)+1;
+    indexes.set(lessonId,index);
+    choice(lessonId+'-depth-'+String(index).padStart(2,'0'),lessonId,title,prompt,example,options,0,hints,explanation);
+  }
+}
