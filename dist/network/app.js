@@ -95,11 +95,15 @@ function shell(content) {
 
 function mapView() {
   const total = state.chapters.flatMap((chapter) => chapter.lessons).length;
+  return shell(`<main class="wrap"><div class="page-heading"><div><p class="eyebrow">网络知识地图</p><h1>从一次网页请求，走到独立排障。</h1><p>10 大关 · ${total} 小关。先做题，再按提示补知识；每一步都能回到对应资料。</p></div><div class="route-decoration" aria-hidden="true"><span>浏览器</span><i></i><span>网络</span><i></i><span>服务器</span></div></div><label class="search-label" for="lesson-search">找一个知识点</label><input id="lesson-search" class="search" type="search" placeholder="例如：缓存、TCP、证书" value="${escapeHtml(state.filter)}"><div class="map-list">${mapResults()}</div></main>`);
+}
+
+function mapResults() {
   const matched = state.chapters.map((chapter) => ({ ...chapter, lessons: chapter.lessons.filter((lesson) => `${lesson.title} ${lesson.goal} ${chapter.title}`.toLowerCase().includes(state.filter.toLowerCase())) })).filter((chapter) => chapter.lessons.length);
-  return shell(`<main class="wrap"><div class="page-heading"><div><p class="eyebrow">网络知识地图</p><h1>从一次网页请求，走到独立排障。</h1><p>10 大关 · ${total} 小关。先做题，再按提示补知识；每一步都能回到对应资料。</p></div><div class="route-decoration" aria-hidden="true"><span>浏览器</span><i></i><span>网络</span><i></i><span>服务器</span></div></div><label class="search-label" for="lesson-search">找一个知识点</label><input id="lesson-search" class="search" type="search" placeholder="例如：缓存、TCP、证书" value="${escapeHtml(state.filter)}"><div class="map-list">${matched.map((chapter, index) => {
+  return matched.map((chapter, index) => {
     const completed = chapter.lessons.filter((lesson) => lessonStatus(lesson.id) === '巩固通过').length;
     return `<section class="chapter" id="${chapter.id}"><div class="chapter-title"><span class="chapter-number">${chapter.id.slice(1)}</span><div><h2>${escapeHtml(chapter.title)}</h2><p>${escapeHtml(chapter.summary)}</p></div><strong>${completed}/${chapter.lessons.length} 巩固</strong></div><div class="lesson-grid">${chapter.lessons.map((lesson) => `<a class="lesson-card" href="#/lesson/${lesson.id}"><span class="lesson-index">${escapeHtml(lesson.id.slice(1).replace('-l', '.'))}</span><h3>${escapeHtml(lesson.title)}</h3><p>${escapeHtml(lesson.goal)}</p><span class="lesson-state">${escapeHtml(lessonStatus(lesson.id))} <b aria-hidden="true">↗</b></span></a>`).join('')}</div></section>`;
-  }).join('') || '<p class="empty">没有找到匹配的小关。</p>'}</div></main>`);
+  }).join('') || '<p class="empty">没有找到匹配的小关。</p>';
 }
 
 function lessonView() {
@@ -154,13 +158,19 @@ function render() {
 function bind() {
   app.querySelector('#answer-input')?.addEventListener('input', (event) => { state.input = event.target.value; });
   const search = app.querySelector('#lesson-search');
+  let composing = false;
+  const updateSearch = () => {
+    state.filter = search.value;
+    // Keep the input node, focus and selection intact; only replace results.
+    app.querySelector('.map-list').innerHTML = mapResults();
+  };
+  search?.addEventListener('compositionstart', () => { composing = true; });
+  search?.addEventListener('compositionend', () => {
+    composing = false;
+    updateSearch();
+  });
   search?.addEventListener('input', (event) => {
-    state.filter = event.target.value;
-    const position = event.target.selectionStart;
-    render();
-    const next = app.querySelector('#lesson-search');
-    next?.focus();
-    next?.setSelectionRange(position, position);
+    if (!composing && !event.isComposing) updateSearch();
   });
   app.querySelectorAll('input[name="answer"]').forEach((input) => input.addEventListener('change', () => {
     state.selected = [...app.querySelectorAll('input[name="answer"]:checked')].map((item) => Number(item.value));

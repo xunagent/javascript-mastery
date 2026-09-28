@@ -54,7 +54,26 @@ try {
     assert.equal(await page.locator('.lesson-card').count(), 72);
     await noOverflow();
     if (shots) await page.screenshot({ path: resolve(shots, `map-${viewport.width}.png`), fullPage: false });
+    const searchInput = await page.locator('#lesson-search').elementHandle();
+    await searchInput.focus();
+    const ime = await context.newCDPSession(page);
+    for (const text of ['h', 'huan', '缓存']) {
+      await ime.send('Input.imeSetComposition', { text, selectionStart: text.length, selectionEnd: text.length });
+      assert.equal(await searchInput.evaluate((input) => input.isConnected && document.activeElement === input), true, 'IME must retain its original focused input');
+      assert.equal(await page.locator('.lesson-card').count(), 72, 'do not filter unfinished composition');
+    }
+    await ime.send('Input.insertText', { text: '缓存' });
+    assert.equal(await searchInput.inputValue(), '缓存');
+    const cacheMatches = chapters.flatMap((chapter) => chapter.lessons.filter((lesson) => `${lesson.title} ${lesson.goal} ${chapter.title}`.includes('缓存'))).length;
+    assert.equal(await page.locator('.lesson-card').count(), cacheMatches, 'filter committed Chinese text');
+    await searchInput.fill('');
+    await ime.send('Input.imeSetComposition', { text: 'zheng', selectionStart: 5, selectionEnd: 5 });
+    await ime.send('Input.imeSetComposition', { text: '', selectionStart: 0, selectionEnd: 0 });
+    assert.equal(await searchInput.inputValue(), '');
+    assert.equal(await page.locator('.lesson-card').count(), 72, 'cancelled composition restores the full map');
+    await ime.detach();
     await page.locator('#lesson-search').fill('CORS');
+    assert.equal(await searchInput.evaluate((input) => input.isConnected && document.activeElement === input), true, 'ordinary typing also retains the input node');
     assert.ok(await page.locator('.lesson-card').count() > 0);
     assert.ok(await page.locator('.lesson-card').count() < 72);
 
