@@ -4,6 +4,7 @@ const ready = Promise.all([import('./compiler.mjs'), fetch('./vendor/libraries.j
   if (!r.ok) throw Error('类型库加载失败，请刷新或稍后重试。');
   return r.json();
 })]).then(([module, libraries]) => { checker = module.createChecker(ts, libraries); });
+ready.then(() => self.postMessage({ type: 'ready' }), (error) => self.postMessage({ type: 'startup-error', error: error.message }));
 self.onmessage = async ({ data }) => {
   try {
     await ready;

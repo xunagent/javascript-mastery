@@ -34,12 +34,14 @@ try{
     const choice=questions.find(q=>q.kind==='choice');await visit('question/'+choice.id);await page.locator(`input[name=answer][value="${choice.answer}"]`).check();await page.locator('#submit-answer').click();await page.locator('.feedback.correct').waitFor();
     let saved=await page.evaluate(k=>JSON.parse(localStorage.getItem(k)),storageKey);assert.equal(saved.progress[choice.id].attempts.at(-1).independent,true);
     const q=questions.find(q=>q.id==='t01-l01-q04');await visit('question/'+q.id);await noOverflow();
+    if(viewport.width===1440) await page.route('**/vendor/libraries.json',async(route)=>{await new Promise(resolve=>setTimeout(resolve,22000));await route.continue();});
     const editor=await page.locator('#code-editor').elementHandle();await editor.focus();
     await editor.fill('// ');for(const text of ['zhong','中文']){await ime.send('Input.imeSetComposition',{text,selectionStart:text.length,selectionEnd:text.length});assert.equal(await editor.evaluate(e=>e.isConnected&&document.activeElement===e),true);}
     await ime.send('Input.insertText',{text:'中文'});assert.match(await editor.inputValue(),/中文/);await ime.detach();
     await editor.fill(q.solution['main.ts']);await page.locator('[data-hint="1"]').click();assert.equal(await editor.evaluate(e=>e.isConnected),true);assert.equal(await editor.inputValue(),q.solution['main.ts']);
     await page.reload();await page.locator('#code-editor').waitFor();assert.equal(await page.locator('#code-editor').inputValue(),q.solution['main.ts']);
-    await page.locator('#submit-answer').click();await page.locator('.feedback.correct').waitFor({timeout:30000});
+    await page.locator('#submit-answer').click();await page.locator('.feedback.correct').waitFor({timeout:60000});
+    if(viewport.width===1440) await page.unroute('**/vendor/libraries.json');
     assert.match(await page.locator('.feedback h2').innerText(),/练习通过/);
     saved=await page.evaluate(k=>JSON.parse(localStorage.getItem(k)),storageKey);assert.equal(saved.progress[q.id].attempts.at(-1).independent,false);
     const multi=questions.find(q=>q.id==='t01-l04-q04');await visit('question/'+multi.id);

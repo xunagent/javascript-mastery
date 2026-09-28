@@ -13,7 +13,7 @@ const question = () => state.questions.find((q) => q.id === state.id);
 const siblings = (id) => state.questions.filter((q) => q.lessonId === id);
 const record = (id) => state.progress[id] || emptyRecord();
 const date = (at) => new Date(at).toLocaleString('zh-CN', { month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit' });
-let compiler, frame, timer, rejectPending;
+let compiler, compilerReady = false, frame, timer, rejectPending;
 
 function save() {
   try { localStorage.setItem(KEY, JSON.stringify({ progress: state.progress, drafts: state.drafts })); }
@@ -100,13 +100,19 @@ function route() {
 }
 function codeFiles() { const q=question(); return structuredClone(filesFor(q)); }
 function compilerRequest(data) {
-  compiler ||= new Worker('./compiler-worker.js');
+  if (!compiler) { compiler = new Worker('./compiler-worker.js'); compilerReady = false; }
   const id = crypto.randomUUID();
   return new Promise((resolve,reject) => {
     rejectPending = reject;
-    timer = setTimeout(() => { compiler?.terminate(); compiler=null; reject(Error('类型检查超时。请检查是否出现过深的递归类型，再重试。')); },20000);
-    compiler.onmessage = ({data:message}) => { if(message.id !== id) return; clearTimeout(timer); rejectPending=null; message.error ? reject(Error(message.error)) : resolve(message.result); };
-    compiler.onerror = () => { clearTimeout(timer); compiler?.terminate(); compiler=null; reject(Error('编译器未能加载，请检查网络后重试。')); };
+    const timeout = () => { compiler?.terminate(); compiler=null; compilerReady=false; reject(Error('类型检查超时。请检查网络或是否出现过深的递归类型，再重试。')); };
+    timer = setTimeout(timeout,compilerReady?20000:180000);
+    compiler.onmessage = ({data:message}) => {
+      if(message.type==='ready') { compilerReady=true; clearTimeout(timer); timer=setTimeout(timeout,20000); return; }
+      if(message.type==='startup-error') { clearTimeout(timer); compiler?.terminate(); compiler=null; compilerReady=false; reject(Error(message.error)); return; }
+      if(message.id !== id) return;
+      clearTimeout(timer); rejectPending=null; message.error ? reject(Error(message.error)) : resolve(message.result);
+    };
+    compiler.onerror = () => { clearTimeout(timer); compiler?.terminate(); compiler=null; compilerReady=false; reject(Error('编译器未能加载，请检查网络后重试。')); };
     compiler.postMessage({id,...data});
   });
 }
