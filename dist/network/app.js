@@ -90,7 +90,7 @@ function route() {
 function shell(content) {
   const total = state.chapters.flatMap((chapter) => chapter.lessons).length;
   const started = state.chapters.flatMap((chapter) => chapter.lessons).filter((lesson) => questionsFor(lesson.id).some((question) => attempted(question.id))).length;
-  return `<header class="topbar"><a class="brand" href="#/map"><span class="brand-icon">◉</span><span>网络闯关</span></a><nav aria-label="主导航"><a href="#/map" class="${['map','lesson','question'].includes(state.view) ? 'active' : ''}">知识地图</a><a href="#/review" class="${state.view === 'review' ? 'active' : ''}">待巩固</a><a href="#/profile" class="${state.view === 'profile' ? 'active' : ''}">学习记录</a></nav><span class="header-stat">已开始 ${started} / ${total} 小关</span></header>${content}<footer class="footer"><span>题目与解析原创编写 · 来源链接用于延伸阅读</span><a href="../">JavaScript 闯关 ↗</a></footer>`;
+  return `<header class="topbar"><a class="brand" href="#/map"><span class="brand-icon">◉</span><span>网络闯关</span></a><nav aria-label="主导航"><a href="#/map" class="${['map','lesson','question'].includes(state.view) ? 'active' : ''}">知识地图</a><a href="#/review" class="${state.view === 'review' ? 'active' : ''}">待巩固</a><a href="#/profile" class="${state.view === 'profile' ? 'active' : ''}">学习记录</a></nav><span class="header-stat">已开始 ${started} / ${total} 小关</span></header>${content}<footer class="footer"><span>题目与解析原创编写 · 来源链接用于延伸阅读</span><nav><a href="../">JavaScript 闯关 ↗</a> · <a href="../typescript/">TypeScript 闯关 ↗</a></nav></footer>`;
 }
 
 function mapView() {

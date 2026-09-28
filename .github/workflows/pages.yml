@@ -28,8 +28,11 @@ jobs:
       - run: npm test
       - run: npm run audit:strict
       - run: npm run network:audit
+      - run: npm run typescript:test
+      - run: npm run typescript:audit
       - run: npx playwright install --with-deps chromium
       - run: npm run network:smoke
+      - run: npm run typescript:smoke
       - uses: actions/upload-pages-artifact@v4
         with:
           path: dist

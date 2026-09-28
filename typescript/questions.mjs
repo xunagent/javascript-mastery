@@ -1,0 +1,15 @@
+import { questions as g01 } from './packs/g01.mjs';
+import { questions as g02 } from './packs/g02.mjs';
+import { questions as g03 } from './packs/g03.mjs';
+import { questions as g04 } from './packs/g04.mjs';
+import { questions as g05 } from './packs/g05.mjs';
+import { questions as g06 } from './packs/g06.mjs';
+import { questions as g07 } from './packs/g07.mjs';
+import { questions as g08 } from './packs/g08.mjs';
+import { questions as g09 } from './packs/g09.mjs';
+import { questions as g10 } from './packs/g10.mjs';
+import { questions as g11 } from './packs/g11.mjs';
+import { questions as g12 } from './packs/g12.mjs';
+import { questions as g13 } from './packs/g13.mjs';
+import { questions as g14 } from './packs/g14.mjs';
+export const questions = [...g01, ...g02, ...g03, ...g04, ...g05, ...g06, ...g07, ...g08, ...g09, ...g10, ...g11, ...g12, ...g13, ...g14];

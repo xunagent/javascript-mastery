@@ -1,0 +1,31 @@
+<!doctype html><meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline' 'unsafe-eval'; worker-src blob:; connect-src 'none'">
+<script>
+// Loaded with sandbox="allow-scripts": no shared origin, cookies or storage.
+addEventListener('message', function start(event) {
+  if (event.source !== parent || !event.data?.source || !event.data?.token) return;
+  removeEventListener('message', start);
+  const { source, payload, token } = event.data;
+  const bootstrap = `
+    const send = self.postMessage.bind(self);
+    let sent = false;
+    function finish(value) { if (!sent) { sent = true; send(value); } }
+    self.addEventListener('unhandledrejection', event => {
+      event.preventDefault();
+      finish({checks:[{name:'未处理的异步失败',passed:false,message:String(event.reason?.message ?? event.reason).slice(0,300)}]});
+    });
+    self.onmessage = async event => {
+      try {
+        const checks = await runCourseTests(event.data);
+        setTimeout(() => finish({checks}), 0);
+      } catch (error) { finish({error:String(error.message)}); }
+    };
+  `;
+  const url = URL.createObjectURL(new Blob([source + '\n' + bootstrap], { type: 'text/javascript' }));
+  const worker = new Worker(url);
+  const timer = setTimeout(() => { worker.terminate(); URL.revokeObjectURL(url); parent.postMessage({ token, error: '运行超时，请检查循环和 Promise 是否能结束。' }, '*'); }, 4000);
+  worker.onmessage = e => { clearTimeout(timer); worker.terminate(); URL.revokeObjectURL(url); parent.postMessage({ token, ...e.data }, '*'); };
+  worker.onerror = e => { clearTimeout(timer); worker.terminate(); URL.revokeObjectURL(url); parent.postMessage({ token, error: e.message || '运行失败' }, '*'); };
+  worker.postMessage(payload);
+});
+</script>

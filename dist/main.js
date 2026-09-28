@@ -122,7 +122,7 @@ function syncRoute() {
 
 function renderHeader() {
   const answered = state.questions.filter((q) => recordFor(q.id).attempts).length;
-  return `<header class="topbar"><a class="brand" href="#/learn" aria-label="JS 闯关首页"><span class="brand-mark">JS</span><span>JS 闯关</span></a><nav aria-label="主导航"><a href="#/learn" class="${['learn','chapter','question','diagnostic'].includes(state.view) ? 'active' : ''}">知识地图</a><a href="#/review" class="${state.view === 'review' ? 'active' : ''}">复习中心</a><a href="#/profile" class="${state.view === 'profile' ? 'active' : ''}">学习记录</a></nav><div class="header-progress">已练习 <strong>${answered}</strong> / ${state.questions.length} 题</div></header>`;
+  return `<header class="topbar"><a class="brand" href="#/learn" aria-label="JS 闯关首页"><span class="brand-mark">JS</span><span>JS 闯关</span></a><nav aria-label="主导航"><a href="#/learn" class="${['learn','chapter','question','diagnostic'].includes(state.view) ? 'active' : ''}">知识地图</a><a href="#/review" class="${state.view === 'review' ? 'active' : ''}">复习中心</a><a href="#/profile" class="${state.view === 'profile' ? 'active' : ''}">学习记录</a><a href="./typescript/">TypeScript ↗</a><a href="./network/">网络与 HTTP ↗</a></nav><div class="header-progress">已练习 <strong>${answered}</strong> / ${state.questions.length} 题</div></header>`;
 }
 
 function renderMap() {

@@ -1,6 +1,6 @@
 # JS 闯关
 
-一个无需账号、无需 AI 的 JavaScript 学习网站。知识地图来自[现代 JavaScript 教程](https://zh.javascript.info/)；题目、提示与解析是本站原创内容。
+一个无需账号、无需 AI 的学习网站，包含 JavaScript、网络与 HTTP、TypeScript 三门独立课程。JavaScript 知识地图来自[现代 JavaScript 教程](https://zh.javascript.info/)；题目、提示与解析是本站原创内容。
 
 ## 本地预览
 
@@ -56,3 +56,23 @@ npm run network:smoke
 ```
 
 回归覆盖桌面与手机宽度、全部 72 个小关、四种答题交互、提示、错题、延迟复测、刷新持久化、无效存档拒绝及有效存档合并/导出。可用 `NETWORK_SCREENSHOTS=/tmp/network-shots npm run network:smoke` 输出检查截图。Pages 工作流发布前会执行相同检查。
+
+## TypeScript 闯关
+
+课程入口：[TypeScript 闯关](https://xunagent.github.io/javascript-mastery/typescript/)。独立于 JavaScript 和网络课程，无需运行时 AI、账号或后端。
+
+- 14 大关、102 小关、1020 道原创题；每小关 10 题，包括理解判断、代码修复、设计、迁移和换场景复测。408 道编程题使用固定 TypeScript 6.0.3 做真实类型检查；适用的题还检查执行行为、项目配置或编译输出。
+- 每题提供三级提示、详细解析、对应教程链接。资料引用 [xcatliu《TypeScript 入门教程》](https://ts.xcatliu.com/)、[官方 TypeScript Handbook](https://www.typescriptlang.org/docs/handbook/) 及部分[网道 TypeScript 教程](https://wangdoc.com/typescript/)；教程正文不随本站分发。题目以本站固定编译器和题目配置为准。
+- 先独立通过至少 6 道，包含修复、设计、迁移的实际技能；三天后再用两道不同场景的题独立复测。提示、答错、查看解析会记为辅助练习。可查看错题与到期复测。
+- 支持多文件编辑、类型错误与编译输出查看、自动保存草稿、手机练习、学习记录导出及跨设备导入合并。记录保存在当前浏览器，不会自动云同步。
+
+源码在 `typescript/content.mjs`、`typescript/packs/`、`typescript/compiler.mjs` 和 `typescript/site/`，构建产物在 `dist/typescript/`。完整检查：
+
+```bash
+npm run build
+npm run typescript:test
+npm run typescript:audit
+npm run typescript:smoke
+```
+
+编程题的参考答案与测试随静态网站公开，因此闯关用于学习和自测，不作为保密考试。Pages 发布流程会运行上述检查，再发布全部三门课程。
