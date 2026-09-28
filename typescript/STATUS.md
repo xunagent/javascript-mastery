@@ -16,10 +16,7 @@
 - `npm run build`：14 大关、102 小节、1020 题通过严格内容检查。
 - `npm run typescript:test`：77 项通过。
 - `npm run typescript:audit`：408 道编程题的参考答案全部通过，408 份初始代码全部被拒绝；部分题另检查典型错误实现。
-- `npm run typescript:smoke`：此前在 1440px 和 390px 通过；新增首页入口检查后需再次验证。
+- `npm run typescript:smoke`：1440px 和 390px 均通过，包含 JS 首页入口及最终多文件综合题。
+- 后续新增 22 秒人为延迟类型库加载回归，首次加载与类型检查分别计时；1440px 和 390px 浏览器回归均通过。
 - 原课程 `npm test`、`npm run audit:strict`、`npm run network:audit`、`npm run network:smoke` 均通过；JS 1800 题、网络 1008 题保持完整。
-
-## 待完成
-
-- 新增入口后的最后一次桌面/手机浏览器验证。
-- 将代码发布到 GitHub Pages，确认公开地址能加载题目、进入课程并提交答案。
+- GitHub Pages 工作流全部通过并已部署。公开地址 `https://xunagent.github.io/javascript-mastery/typescript/` 在手机尺寸浏览器中加载 102 小节，实际编程题提交独立通过；没有页面错误或横向溢出。
